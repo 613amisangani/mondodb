@@ -1,0 +1,7074 @@
+Microsoft Windows [Version 10.0.22631.3296]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Admin>mongosh
+Current Mongosh Log ID: 66176988dc6445d82316c9b4
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.3
+Using MongoDB:          7.0.8
+Using Mongosh:          2.2.3
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-04-11T09:16:17.938+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> show dbs;
+admin    40.00 KiB
+config  108.00 KiB
+local    40.00 KiB
+test> use most;
+switched to db most
+most> show most;
+MongoshInvalidInputError: [COMMON-10001] 'most' is not a valid argument for "show".
+most> show bds;
+MongoshInvalidInputError: [COMMON-10001] 'bds' is not a valid argument for "show".
+most> show dbs;
+admin    40.00 KiB
+config  108.00 KiB
+local    40.00 KiB
+most> db.createCollection("cost");
+{ ok: 1 }
+most> db.cost.insertOne({});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66176a82dc6445d82316c9b5')
+}
+most> db.cost.insertOne({});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66176a91dc6445d82316c9b6')
+}
+most> db.cost.insertOne({
+... "name" : 'john',
+... "age" : 20,
+... "subject" : ['math', 'science']});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66176aebdc6445d82316c9b7')
+}
+most> db.cost.insertMany([
+... {
+... "name" : 'smith',
+... "age" : 21,
+... "subject" : ['math','science']},
+... {
+... "name" : 'carry',
+... "age" : 18,
+... "subject" : ['math' ,'science']}
+... });
+Uncaught:
+SyntaxError: Unexpected token, expected "," (10:0)
+
+   8 | "age" : 18,
+   9 | "subject" : ['math' ,'science']}
+> 10 | });
+     | ^
+  11 |
+
+most> db.cost.insertMany([ { "name" : 'smith', "age" : 21, "subject" : ['math','science']}, { "name" : 'carry', "age" : 18, "subject" : ['math' ,'science']} ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('66176bcedc6445d82316c9b8'),
+    '1': ObjectId('66176bcedc6445d82316c9b9')
+  }
+}
+most> db.createCollection("client_master");
+{ ok: 1 }
+most> db.client_master.insertOne({
+... "clientno" : 1,
+... "name" : 'ivan',
+... "address1" : 'mumbai',
+... "city" : 'surat',
+... "pincode" : 234543,
+... "state" : 'maharashtra',
+... "baldue" : 15000
+... });
+{
+  acknowledged: true,
+  insertedId: ObjectId('66176e53dc6445d82316c9ba')
+}
+most> db.client_master.insertMany([
+... {
+... "clientno" : 'C00002',
+... "name" : 'mamta muzumdur',
+... "address1" : 'kolkata',
+... "city" : 'madras',
+... "pincode" : 780001,
+... "state" : 'tamil nadu',
+... "baldue" : 0]},
+Uncaught:
+SyntaxError: Unexpected token, expected "," (9:12)
+
+   7 | "pincode" : 780001,
+   8 | "state" : 'tamil nadu',
+>  9 | "baldue" : 0]},
+     |             ^
+  10 |
+
+most> db.client_master.insertMany([ { "clientno" : 'C00002', "name" : 'mamta muzumdur', "address1" : 'kolkata', "city" : 'madras', "pincode" : 780001, "state" : 'tamil nadu', "baldue" : 0 },{"clientno" : 'C00003', "name" : 'chhaya bankar', "address1" : 'kolkata', "city" : 'mumbai', "pincode" : 400057, "state" : 'maharashtra', "baldue" : 5000},{"clientno" : 'C00004', "name" : 'ashwini joshi', "address1" : 'kolkata', "city" : 'bangolar', "pincode" : 560001, "state" : 'karnataka', "baldue" : 0},{"clientno" : 'C00005', "name" : 'hansel colaco', "address1" : 'kolkata', "city" : 'mumbai', "pincode" : 400060, "state" : 'maharashtra', "baldue" : 20000},{"clientno" : 'C00006', "name" : 'deepak sharma', "address1" : 'kolkata', "city" : 'manglore', "pincode" : 560050, "state" : 'karnatka', "baldue" : 0}]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('661773dcdc6445d82316c9bb'),
+    '1': ObjectId('661773dcdc6445d82316c9bc'),
+    '2': ObjectId('661773dcdc6445d82316c9bd'),
+    '3': ObjectId('661773dcdc6445d82316c9be'),
+    '4': ObjectId('661773dcdc6445d82316c9bf')
+  }
+}
+most>
+
+
+
+ { "productno" : 'p00001',"description" : 'T-shirt',"profit-percent" : 5, "unit-measure" : 'piecs', "qtyonhand" : 200, "recorderlvl" : 50, "sellprice" : 350, "costprice" : 250},{ "productno" : 'p0345',"description" : 'shirt', "profit-percent" : 6, "unit-measure" : 'piecs', "qtyonhand" : 150, "recorderlvl" : 50, "sellprice" : 500, "costprice" : 350},{"productno" : 'p06734', "description" : 'cotton jence', "profit-percent" : 5,"unit-measure" : 'piecs',"qtyonhand" : 100,"recorderlvl" : 20, "sellprice" : 600, "costprice" : 450},{"productno" : 'p07865',"description" : 'jence',"profit-percent" : 5, "unit-measure" : 'piecs',"qtyonhand" : 100, "recorderlvl" : 20, "sellprice" : 750, "costprice" : 500},{ "productno" : 'p07868',"description" : 'Trousers', "profit-percent" : 2,"unit-measure" : 'piecs',"qtyonhand" : 150,"recorderlvl" : 50,"sellprice" : 850,"costprice" : 550},{"productno" : 'p07885', "description" : 'pull overs', "profit-percent" : '2.5',"unit-measure" : 'piecs',"qtyonhand" : 80,"recorderlvl" : 30,"sellprice" : 700,"costprice" : 450},{"productno" : 'p07965', "description" : 'denim shirt',"profit-percent" : 4, "unit-measure" : 'piecs', "qtyonhand" : 100, "recorderlvl" : 40, "sellprice" : 350, "costprice" : 250},{"productno" : 'p07975', "description" : 'ltera tops', "profit-percent" : 5, "unit-measure" : 'piecs', "qtyonhand" : 70, "recorderlvl" : 00, "sellprice" : 300,"costprice" : 175},{"productno" : 'p08865', "description" : 'skirts',"profit-percent" : 5, "unit-measure" : 'piecs', "qtyonhand" : 75,"recorderlvl" : 30,"sellprice" : 450,"costprice" : 300}
+
+
+
+test> use most;
+switched to db most
+most> db.createCollection("salesman_master");
+{ ok: 1 }
+most> db.salesman_master.insertMany([{"saleamanno" : 'S00001', "name" : 'aman', "address1" : 'a/14', "address2" : 'worli', "city" : 'mumbai', "pincode" : 400002, "state" : 'maharashtra', "salamt" : 3000, "tgttoget" : 100, "ytd" : 50, "remarks" : 'good'},{"saleamanno" : 'S00002', "name" : 'omkar', "address1" : 65, "address2" : 'nariman', "city" : 'mumbai', "pincode" : 400001, "state" : 'maharashtra', "salamt" : 3000, "tgttoget" : 200, "ytd" : 100, "remarks" : 'good'},{"saleamanno" : 'S00003', "name" : 'raj', "address1" : 'p-7', "address2" : 'bandra', "city" : 'mumbai', "pincode" : 400032, "state" : 'maharashtra', "salamt" : 3000, "tgttoget" : 200, "ytd" : 100, "remarks" : 'good'},{"saleamanno" : 'S00004', "name" : 'ashish', "address1" : 'a/5', "address2" : 'juhu', "city" : 'mumbai', "pincode" : 400044, "state" : 'maharashtra', "salamt" : 3500, "tgttoget" : 200, "ytd" : 150, "remarks" : 'good'}]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6619546df6a639476c16c9b5'),
+    '1': ObjectId('6619546df6a639476c16c9b6'),
+    '2': ObjectId('6619546df6a639476c16c9b7'),
+    '3': ObjectId('6619546df6a639476c16c9b8')
+  }
+}
+
+
+
+Microsoft Windows [Version 10.0.22631.3296]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Admin>mongosh
+Current Mongosh Log ID: 661a10a02f05d3b96716c9b4
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.3
+Using MongoDB:          7.0.8
+Using Mongosh:          2.2.3
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-04-11T09:16:17.938+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> show dbs;
+admin    40.00 KiB
+config  108.00 KiB
+local    40.00 KiB
+most    184.00 KiB
+test     72.00 KiB
+test> use most;
+switched to db most
+most>  db.salesman_master.find({"city": 'mumbai'},{"name": 'aman'});
+[
+  { _id: ObjectId('6619546df6a639476c16c9b5'), name: 'aman' },
+  { _id: ObjectId('6619546df6a639476c16c9b6'), name: 'aman' },
+  { _id: ObjectId('6619546df6a639476c16c9b7'), name: 'aman' },
+  { _id: ObjectId('6619546df6a639476c16c9b8'), name: 'aman' }
+]
+most> show Collection;
+MongoshInvalidInputError: [COMMON-10001] 'Collection' is not a valid argument for "show".
+most> show Collections;
+MongoshInvalidInputError: [COMMON-10001] 'Collections' is not a valid argument for "show".
+most> show collections;
+client_master
+cost
+salesman_master
+most> db.salesman_master.find({"city": 'mumbai'},{"name": 'aman'});
+[
+  { _id: ObjectId('6619546df6a639476c16c9b5'), name: 'aman' },
+  { _id: ObjectId('6619546df6a639476c16c9b6'), name: 'aman' },
+  { _id: ObjectId('6619546df6a639476c16c9b7'), name: 'aman' },
+  { _id: ObjectId('6619546df6a639476c16c9b8'), name: 'aman' }
+]
+most> db.salesman_master.find({"city": 'mumbai'},{"name":'aman'});
+[
+  { _id: ObjectId('6619546df6a639476c16c9b5'), name: 'aman' },
+  { _id: ObjectId('6619546df6a639476c16c9b6'), name: 'aman' },
+  { _id: ObjectId('6619546df6a639476c16c9b7'), name: 'aman' },
+  { _id: ObjectId('6619546df6a639476c16c9b8'), name: 'aman' }
+]
+most> db.salesman_master.find({"city": 'mumbai'},{"name":'raj'});
+[
+  { _id: ObjectId('6619546df6a639476c16c9b5'), name: 'raj' },
+  { _id: ObjectId('6619546df6a639476c16c9b6'), name: 'raj' },
+  { _id: ObjectId('6619546df6a639476c16c9b7'), name: 'raj' },
+  { _id: ObjectId('6619546df6a639476c16c9b8'), name: 'raj' }
+]
+most> db.salesman_master.find({"city": 'mumbai'},{"name":'amam'});
+[
+  { _id: ObjectId('6619546df6a639476c16c9b5'), name: 'amam' },
+  { _id: ObjectId('6619546df6a639476c16c9b6'), name: 'amam' },
+  { _id: ObjectId('6619546df6a639476c16c9b7'), name: 'amam' },
+  { _id: ObjectId('6619546df6a639476c16c9b8'), name: 'amam' }
+]
+most> db.salesman_master.find({"city": 'mumbai'},{"name":'ashish'});
+[
+  { _id: ObjectId('6619546df6a639476c16c9b5'), name: 'ashish' },
+  { _id: ObjectId('6619546df6a639476c16c9b6'), name: 'ashish' },
+  { _id: ObjectId('6619546df6a639476c16c9b7'), name: 'ashish' },
+  { _id: ObjectId('6619546df6a639476c16c9b8'), name: 'ashish' }
+]
+most> db.salesman_master.findOne({"city": 'mumbai'},{"name":'ashish'});
+{ _id: ObjectId('6619546df6a639476c16c9b5'), name: 'ashish' }
+most> db.salesman_master.findOne({"city": 'mumbai'},{"name":'ashish'});
+{ _id: ObjectId('6619546df6a639476c16c9b5'), name: 'ashish' }
+most> db.salesman_master.find({"name":'ashish','amam','ashish'});
+Uncaught:
+SyntaxError: Unexpected token (1:47)
+
+> 1 | db.salesman_master.find({"name":'ashish','amam','ashish'});
+    |                                                ^
+  2 |
+
+most> db.salesman_master.find({"name":'ashish'},{"name":'amam'},{"name":'ashish'});
+[ { _id: ObjectId('6619546df6a639476c16c9b8'), name: 'amam' } ]
+most> db.salesman_master.find({"name":'ashish'},{"name":'amam'},{"name":'raj'});
+[ { _id: ObjectId('6619546df6a639476c16c9b8'), name: 'amam' } ]
+most> db.salesman_master.find();
+[
+  {
+    _id: ObjectId('6619546df6a639476c16c9b5'),
+    saleamanno: 'S00001',
+    name: 'aman',
+    address1: 'a/14',
+    address2: 'worli',
+    city: 'mumbai',
+    pincode: 400002,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 100,
+    ytd: 50,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b6'),
+    saleamanno: 'S00002',
+    name: 'omkar',
+    address1: 65,
+    address2: 'nariman',
+    city: 'mumbai',
+    pincode: 400001,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b7'),
+    saleamanno: 'S00003',
+    name: 'raj',
+    address1: 'p-7',
+    address2: 'bandra',
+    city: 'mumbai',
+    pincode: 400032,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b8'),
+    saleamanno: 'S00004',
+    name: 'ashish',
+    address1: 'a/5',
+    address2: 'juhu',
+    city: 'mumbai',
+    pincode: 400044,
+    state: 'maharashtra',
+    salamt: 3500,
+    tgttoget: 200,
+    ytd: 150,
+    remarks: 'good'
+  }
+]
+most> db.salesman_master.find({"name":'ashish'},{"name":'amam'},{"name":'raj'});
+[ { _id: ObjectId('6619546df6a639476c16c9b8'), name: 'amam' } ]
+most> db.salesman_master.findOne({"name":'ashish'},{"name":'amam'},{"name":'raj'});
+{ _id: ObjectId('6619546df6a639476c16c9b8'), name: 'amam' }
+most> db.salesman_master.findMany({"name":'ashish'},{"name":'amam'},{"name":'raj'});
+TypeError: db.salesman_master.findMany is not a function
+most> db.salesman_master.find({"name":'ashish'},{"name":'amam'},{"name":'raj'});
+[ { _id: ObjectId('6619546df6a639476c16c9b8'), name: 'amam' } ]
+most>
+
+
+
+most> db.client_master.findOne({"baldue" : 0} , {"city" : 'manglore'});
+{ _id: ObjectId('661773dcdc6445d82316c9bb'), city: 'manglore' }
+
+Microsoft Windows [Version 10.0.22631.3447]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Admin>mongosh
+Current Mongosh Log ID: 661c07a12a35c3fc0316c9b4
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.3
+Using MongoDB:          7.0.8
+Using Mongosh:          2.2.3
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-04-13T15:15:28.533+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> show dbs
+admin    40.00 KiB
+config   96.00 KiB
+local    72.00 KiB
+most    184.00 KiB
+test     72.00 KiB
+test> use most;
+switched to db most
+most> db.createCollection("salesman_master");
+{ ok: 1 }
+most> show tables;
+client_master
+cost
+salesman_master
+most> db.createCollection("product_master");
+{ ok: 1 }
+most> db.product_master.insertMany([{ "productno" : 'p00001',"description" : 'T-shirt',"profit-percent" : 5, "unit-measure" : 'piecs', "qtyonhand" : 200, "recorderlvl" : 50, "sellprice" : 350, "costprice" : 250},{ "productno" : 'p0345',"description" : 'shirt', "profit-percent" : 6, "unit-measure" : 'piecs', "qtyonhand" : 150, "recorderlvl" : 50, "sellprice" : 500, "costprice" : 350},{"productno" : 'p06734', "description" : 'cotton jence', "profit-percent" : 5,"unit-measure" : 'piecs',"qtyonhand" : 100,"recorderlvl" : 20, "sellprice" : 600, "costprice" : 450},{"productno" : 'p07865',"description" : 'jence',"profit-percent" : 5, "unit-measure" : 'piecs',"qtyonhand" : 100, "recorderlvl" : 20, "sellprice" : 750, "costprice" : 500},{ "productno" : 'p07868',"description" : 'Trousers', "profit-percent" : 2,"unit-measure" : 'piecs',"qtyonhand" : 150,"recorderlvl" : 50,"sellprice" : 850,"costprice" : 550},{"productno" : 'p07885', "description" : 'pull overs', "profit-percent" : '2.5',"unit-measure" : 'piecs',"qtyonhand" : 80,"recorderlvl" : 30,"sellprice" : 700,"costprice" : 450},{"productno" : 'p07965', "description" : 'denim shirt',"profit-percent" : 4, "unit-measure" : 'piecs', "qtyonhand" : 100, "recorderlvl" : 40, "sellprice" : 350, "costprice" : 250},{"productno" : 'p07975', "description" : 'ltera tops', "profit-percent" : 5, "unit-measure" : 'piecs', "qtyonhand" : 70, "recorderlvl" : 00, "sellprice" : 300,"costprice" : 175},{"productno" : 'p08865', "description" : 'skirts',"profit-percent" : 5, "unit-measure" : 'piecs', "qtyonhand" : 75,"recorderlvl" : 30,"sellprice" : 450,"costprice" : 300}]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('661c0a842a35c3fc0316c9b5'),
+    '1': ObjectId('661c0a842a35c3fc0316c9b6'),
+    '2': ObjectId('661c0a842a35c3fc0316c9b7'),
+    '3': ObjectId('661c0a842a35c3fc0316c9b8'),
+    '4': ObjectId('661c0a842a35c3fc0316c9b9'),
+    '5': ObjectId('661c0a842a35c3fc0316c9ba'),
+    '6': ObjectId('661c0a842a35c3fc0316c9bb'),
+    '7': ObjectId('661c0a842a35c3fc0316c9bc'),
+    '8': ObjectId('661c0a842a35c3fc0316c9bd')
+  }
+}
+most> db.product_master.find();
+[
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b5'),
+    productno: 'p00001',
+    description: 'T-shirt',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 200,
+    recorderlvl: 50,
+    sellprice: 350,
+    costprice: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b6'),
+    productno: 'p0345',
+    description: 'shirt',
+    'profit-percent': 6,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 500,
+    costprice: 350
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b7'),
+    productno: 'p06734',
+    description: 'cotton jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 600,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b8'),
+    productno: 'p07865',
+    description: 'jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 750,
+    costprice: 500
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b9'),
+    productno: 'p07868',
+    description: 'Trousers',
+    'profit-percent': 2,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 850,
+    costprice: 550
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9ba'),
+    productno: 'p07885',
+    description: 'pull overs',
+    'profit-percent': '2.5',
+    'unit-measure': 'piecs',
+    qtyonhand: 80,
+    recorderlvl: 30,
+    sellprice: 700,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bb'),
+    productno: 'p07965',
+    description: 'denim shirt',
+    'profit-percent': 4,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 40,
+    sellprice: 350,
+    costprice: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bc'),
+    productno: 'p07975',
+    description: 'ltera tops',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 70,
+    recorderlvl: 0,
+    sellprice: 300,
+    costprice: 175
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bd'),
+    productno: 'p08865',
+    description: 'skirts',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 75,
+    recorderlvl: 30,
+    sellprice: 450,
+    costprice: 300
+  }
+]
+most> db.client_master.find();
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0
+  }
+]
+most> db.client_master.find({"baldue" : 0} , {"city" : 'manglore'} ,{"city" : 'bangolar'} );
+[
+  { _id: ObjectId('661773dcdc6445d82316c9bb'), city: 'manglore' },
+  { _id: ObjectId('661773dcdc6445d82316c9bd'), city: 'manglore' },
+  { _id: ObjectId('661773dcdc6445d82316c9bf'), city: 'manglore' }
+]
+most>
+
+
+most> db.product_master.updateOne({"productno":'p08865'},
+});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+Microsoft Windows [Version 10.0.22631.3447]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Admin>mongosh
+Current Mongosh Log ID: 661dfee52fa1565e1016c9b4
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.3
+Using MongoDB:          7.0.8
+Using Mongosh:          2.2.3
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-04-13T15:15:28.533+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> use most;
+switched to db most
+most> db.product_master.updateOne({"productno":'p08865'},{$set:{"decsription":'shirt'}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+most> db.product_master.updateOne({"productno":'p08865'},{$set:{"decsription":'shirt'}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+most> db.saleaman_master.find();
+
+most> show tables;
+client_master
+cost
+product_master
+salesman_master
+most> db.saleaman_master.find();
+
+most> db.product_master.find();
+[
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b5'),
+    productno: 'p00001',
+    description: 'T-shirt',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 200,
+    recorderlvl: 50,
+    sellprice: 350,
+    costprice: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b6'),
+    productno: 'p0345',
+    description: 'shirt',
+    'profit-percent': 6,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 500,
+    costprice: 350
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b7'),
+    productno: 'p06734',
+    description: 'cotton jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 600,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b8'),
+    productno: 'p07865',
+    description: 'jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 750,
+    costprice: 500
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b9'),
+    productno: 'p07868',
+    description: 'Trousers',
+    'profit-percent': 2,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 850,
+    costprice: 550
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9ba'),
+    productno: 'p07885',
+    description: 'pull overs',
+    'profit-percent': '2.5',
+    'unit-measure': 'piecs',
+    qtyonhand: 80,
+    recorderlvl: 30,
+    sellprice: 700,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bb'),
+    productno: 'p07965',
+    description: 'denim shirt',
+    'profit-percent': 4,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 40,
+    sellprice: 350,
+    costprice: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bc'),
+    productno: 'p07975',
+    description: 'ltera tops',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 70,
+    recorderlvl: 0,
+    sellprice: 300,
+    costprice: 175
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bd'),
+    productno: 'p08865',
+    description: 'skirts',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 75,
+    recorderlvl: 30,
+    sellprice: 450,
+    costprice: 300,
+    decsription: 'shirt'
+  }
+]
+most> db.saleaman_master.find();
+
+most> db.product_master.updateOne({"productno":'p08865'},{$inc:{"costprice":200}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.product_master.updateOne({"productno":'p08865'},{$upset:{"costprice":300}});
+MongoServerError: Unknown modifier: $upset. Expected a valid update modifier or pipeline-style update specified as an array
+most> db.product_master.updateOne({"productno":'p08865'},{$unset:{"costprice":300}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.saleaman_master.find();
+
+most> db.product_master.find();
+[
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b5'),
+    productno: 'p00001',
+    description: 'T-shirt',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 200,
+    recorderlvl: 50,
+    sellprice: 350,
+    costprice: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b6'),
+    productno: 'p0345',
+    description: 'shirt',
+    'profit-percent': 6,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 500,
+    costprice: 350
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b7'),
+    productno: 'p06734',
+    description: 'cotton jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 600,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b8'),
+    productno: 'p07865',
+    description: 'jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 750,
+    costprice: 500
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b9'),
+    productno: 'p07868',
+    description: 'Trousers',
+    'profit-percent': 2,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 850,
+    costprice: 550
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9ba'),
+    productno: 'p07885',
+    description: 'pull overs',
+    'profit-percent': '2.5',
+    'unit-measure': 'piecs',
+    qtyonhand: 80,
+    recorderlvl: 30,
+    sellprice: 700,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bb'),
+    productno: 'p07965',
+    description: 'denim shirt',
+    'profit-percent': 4,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 40,
+    sellprice: 350,
+    costprice: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bc'),
+    productno: 'p07975',
+    description: 'ltera tops',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 70,
+    recorderlvl: 0,
+    sellprice: 300,
+    costprice: 175
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bd'),
+    productno: 'p08865',
+    description: 'skirts',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 75,
+    recorderlvl: 30,
+    sellprice: 450,
+    decsription: 'shirt'
+  }
+]
+most> db.product_master.updateOne({"productno":'p08865'},{$rename:{"costprice":'price'}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+most> db.product_master.find();
+[
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b5'),
+    productno: 'p00001',
+    description: 'T-shirt',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 200,
+    recorderlvl: 50,
+    sellprice: 350,
+    costprice: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b6'),
+    productno: 'p0345',
+    description: 'shirt',
+    'profit-percent': 6,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 500,
+    costprice: 350
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b7'),
+    productno: 'p06734',
+    description: 'cotton jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 600,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b8'),
+    productno: 'p07865',
+    description: 'jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 750,
+    costprice: 500
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b9'),
+    productno: 'p07868',
+    description: 'Trousers',
+    'profit-percent': 2,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 850,
+    costprice: 550
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9ba'),
+    productno: 'p07885',
+    description: 'pull overs',
+    'profit-percent': '2.5',
+    'unit-measure': 'piecs',
+    qtyonhand: 80,
+    recorderlvl: 30,
+    sellprice: 700,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bb'),
+    productno: 'p07965',
+    description: 'denim shirt',
+    'profit-percent': 4,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 40,
+    sellprice: 350,
+    costprice: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bc'),
+    productno: 'p07975',
+    description: 'ltera tops',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 70,
+    recorderlvl: 0,
+    sellprice: 300,
+    costprice: 175
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bd'),
+    productno: 'p08865',
+    description: 'skirts',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 75,
+    recorderlvl: 30,
+    sellprice: 450,
+    decsription: 'shirt'
+  }
+]
+most> db.product_master.updateOne({"productno":'p08865'},{$rename:{"costprice":'price'}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+most> db.product_master.find();
+[
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b5'),
+    productno: 'p00001',
+    description: 'T-shirt',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 200,
+    recorderlvl: 50,
+    sellprice: 350,
+    costprice: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b6'),
+    productno: 'p0345',
+    description: 'shirt',
+    'profit-percent': 6,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 500,
+    costprice: 350
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b7'),
+    productno: 'p06734',
+    description: 'cotton jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 600,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b8'),
+    productno: 'p07865',
+    description: 'jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 750,
+    costprice: 500
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b9'),
+    productno: 'p07868',
+    description: 'Trousers',
+    'profit-percent': 2,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 850,
+    costprice: 550
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9ba'),
+    productno: 'p07885',
+    description: 'pull overs',
+    'profit-percent': '2.5',
+    'unit-measure': 'piecs',
+    qtyonhand: 80,
+    recorderlvl: 30,
+    sellprice: 700,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bb'),
+    productno: 'p07965',
+    description: 'denim shirt',
+    'profit-percent': 4,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 40,
+    sellprice: 350,
+    costprice: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bc'),
+    productno: 'p07975',
+    description: 'ltera tops',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 70,
+    recorderlvl: 0,
+    sellprice: 300,
+    costprice: 175
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bd'),
+    productno: 'p08865',
+    description: 'skirts',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 75,
+    recorderlvl: 30,
+    sellprice: 450,
+    decsription: 'shirt'
+  }
+]
+most> db.product_master.updateOne({"productno":'p07975'},{$rename:{"costprice":'price'}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.product_master.find();
+[
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b5'),
+    productno: 'p00001',
+    description: 'T-shirt',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 200,
+    recorderlvl: 50,
+    sellprice: 350,
+    costprice: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b6'),
+    productno: 'p0345',
+    description: 'shirt',
+    'profit-percent': 6,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 500,
+    costprice: 350
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b7'),
+    productno: 'p06734',
+    description: 'cotton jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 600,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b8'),
+    productno: 'p07865',
+    description: 'jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 750,
+    costprice: 500
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b9'),
+    productno: 'p07868',
+    description: 'Trousers',
+    'profit-percent': 2,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 850,
+    costprice: 550
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9ba'),
+    productno: 'p07885',
+    description: 'pull overs',
+    'profit-percent': '2.5',
+    'unit-measure': 'piecs',
+    qtyonhand: 80,
+    recorderlvl: 30,
+    sellprice: 700,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bb'),
+    productno: 'p07965',
+    description: 'denim shirt',
+    'profit-percent': 4,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 40,
+    sellprice: 350,
+    costprice: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bc'),
+    productno: 'p07975',
+    description: 'ltera tops',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 70,
+    recorderlvl: 0,
+    sellprice: 300,
+    price: 175
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bd'),
+    productno: 'p08865',
+    description: 'skirts',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 75,
+    recorderlvl: 30,
+    sellprice: 450,
+    decsription: 'shirt'
+  }
+]
+most> db.product_master.updateOne({"productno":'p07975'},{$currentDate:{"costprice":'price'}});
+MongoServerError: string is not valid type for $currentDate. Please use a boolean ('true') or a $type expression ({$type: 'timestamp/date'}).
+most> db.product_master.updateOne({"productno":'p07975'},{$currentDate});
+ReferenceError: $currentDate is not defined
+most> db.product_master.updateOne({"productno":'p07975'},{$currentDate:{"date"}});
+Uncaught:
+SyntaxError: Unexpected token (1:72)
+
+> 1 | db.product_master.updateOne({"productno":'p07975'},{$currentDate:{"date"}});
+    |                                                                         ^
+  2 |
+
+most> db.product_master.updateOne({"productno":'p08865'},{$currentDate:{"description":'shirt'}});
+MongoServerError: string is not valid type for $currentDate. Please use a boolean ('true') or a $type expression ({$type: 'timestamp/date'}).
+most> db.product_master.updateOne({"productno":'p08865'},{$pop:{"description":'shirt'}});
+MongoServerError: Expected a number in: description: "shirt"
+most> db.product_master.updateOne({"productno":'p08865'},{$pop:{"description":[8]}});
+MongoServerError: Expected a number in: description: [ 8 ]
+most> db.product_master.updateOne({"productno":'p08865'},{$pop:{"description":-1}});
+MongoServerError: Path 'description' contains an element of non-array type 'string'
+most> db.cost.find();
+[
+  { _id: ObjectId('66176a82dc6445d82316c9b5') },
+  { _id: ObjectId('66176a91dc6445d82316c9b6') },
+  {
+    _id: ObjectId('66176aebdc6445d82316c9b7'),
+    name: 'john',
+    age: 20,
+    subject: [ 'math', 'science' ]
+  },
+  {
+    _id: ObjectId('66176bcedc6445d82316c9b8'),
+    name: 'smith',
+    age: 21,
+    subject: [ 'math', 'science' ]
+  },
+  {
+    _id: ObjectId('66176bcedc6445d82316c9b9'),
+    name: 'carry',
+    age: 18,
+    subject: [ 'math', 'science' ]
+  }
+]
+most> db.cost.updateOne({"name":'carry'},{$pop:{"subject":-1}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.cost.find();
+[
+  { _id: ObjectId('66176a82dc6445d82316c9b5') },
+  { _id: ObjectId('66176a91dc6445d82316c9b6') },
+  {
+    _id: ObjectId('66176aebdc6445d82316c9b7'),
+    name: 'john',
+    age: 20,
+    subject: [ 'math', 'science' ]
+  },
+  {
+    _id: ObjectId('66176bcedc6445d82316c9b8'),
+    name: 'smith',
+    age: 21,
+    subject: [ 'math', 'science' ]
+  },
+  {
+    _id: ObjectId('66176bcedc6445d82316c9b9'),
+    name: 'carry',
+    age: 18,
+    subject: [ 'science' ]
+  }
+]
+most> db.cost.updateOne({"name":'carry'},{$push:{"subject":'hindi'}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.cost.find();
+[
+  { _id: ObjectId('66176a82dc6445d82316c9b5') },
+  { _id: ObjectId('66176a91dc6445d82316c9b6') },
+  {
+    _id: ObjectId('66176aebdc6445d82316c9b7'),
+    name: 'john',
+    age: 20,
+    subject: [ 'math', 'science' ]
+  },
+  {
+    _id: ObjectId('66176bcedc6445d82316c9b8'),
+    name: 'smith',
+    age: 21,
+    subject: [ 'math', 'science' ]
+  },
+  {
+    _id: ObjectId('66176bcedc6445d82316c9b9'),
+    name: 'carry',
+    age: 18,
+    subject: [ 'science', 'hindi' ]
+  }
+]
+most> db.cost.updateOne({"name":'carry'},{$pull:{"subject":'hindi'}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.cost.find();
+[
+  { _id: ObjectId('66176a82dc6445d82316c9b5') },
+  { _id: ObjectId('66176a91dc6445d82316c9b6') },
+  {
+    _id: ObjectId('66176aebdc6445d82316c9b7'),
+    name: 'john',
+    age: 20,
+    subject: [ 'math', 'science' ]
+  },
+  {
+    _id: ObjectId('66176bcedc6445d82316c9b8'),
+    name: 'smith',
+    age: 21,
+    subject: [ 'math', 'science' ]
+  },
+  {
+    _id: ObjectId('66176bcedc6445d82316c9b9'),
+    name: 'carry',
+    age: 18,
+    subject: [ 'science' ]
+  }
+]
+most> db.cost.updateOne({"name":'carry'},{$pull:{subject:{$in:['science']}});
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:69)
+
+> 1 | db.cost.updateOne({"name":'carry'},{$pull:{subject:{$in:['science']}});
+    |                                                                      ^
+  2 |
+
+most> db.cost.updateOne({"name":'carry'},{$pull:{subject:{$in:['science']});
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:68)
+
+> 1 | db.cost.updateOne({"name":'carry'},{$pull:{subject:{$in:['science']});
+    |                                                                     ^
+  2 |
+
+most> db.cost.updateOne({"name":'carry'},{$pull:{subject:{$in:['science']}}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.cost.find();
+[
+  { _id: ObjectId('66176a82dc6445d82316c9b5') },
+  { _id: ObjectId('66176a91dc6445d82316c9b6') },
+  {
+    _id: ObjectId('66176aebdc6445d82316c9b7'),
+    name: 'john',
+    age: 20,
+    subject: [ 'math', 'science' ]
+  },
+  {
+    _id: ObjectId('66176bcedc6445d82316c9b8'),
+    name: 'smith',
+    age: 21,
+    subject: [ 'math', 'science' ]
+  },
+  {
+    _id: ObjectId('66176bcedc6445d82316c9b9'),
+    name: 'carry',
+    age: 18,
+    subject: []
+  }
+]
+most> db.cost.updateOne({"name":'carry'},{$addToset:{"subject": 'hindi','english'}});
+Uncaught:
+SyntaxError: Unexpected token (1:75)
+
+> 1 | db.cost.updateOne({"name":'carry'},{$addToset:{"subject": 'hindi','english'}});
+    |                                                                            ^
+  2 |
+
+most> db.cost.updateOne({"name":'carry'},{$addToset:{subject: 'hindi','english'}});
+Uncaught:
+SyntaxError: Unexpected token (1:73)
+
+> 1 | db.cost.updateOne({"name":'carry'},{$addToset:{subject: 'hindi','english'}});
+    |                                                                          ^
+  2 |
+
+most> db.cost.updateOne({"name":'carry'},{$addToset:{subject: ["hindi","english"]}});
+MongoServerError: Unknown modifier: $addToset. Expected a valid update modifier or pipeline-style update specified as an array
+most> db.cost.updateOne({"name":'carry'},{$addToset:{subject: "hindi","english"}});
+Uncaught:
+SyntaxError: Unexpected token (1:73)
+
+> 1 | db.cost.updateOne({"name":'carry'},{$addToset:{subject: "hindi","english"}});
+    |                                                                          ^
+  2 |
+
+most> db.cost.updateOne({"name":'carry'},{$addToset:{language: "hindi","english"}});
+Uncaught:
+SyntaxError: Unexpected token (1:74)
+
+> 1 | db.cost.updateOne({"name":'carry'},{$addToset:{language: "hindi","english"}});
+    |                                                                           ^
+  2 |
+
+most> db.cost.updateOne({"name":'carry'},{$addToset:{language:{$each: ["hindi","english"]}}});
+MongoServerError: Unknown modifier: $addToset. Expected a valid update modifier or pipeline-style update specified as an array
+most> db.cost.updateOne({"name":'carry'},{$addToset:{subject:{$each: ["hindi","english"]}}});
+MongoServerError: Unknown modifier: $addToset. Expected a valid update modifier or pipeline-style update specified as an array
+most> db.cost.updateOne({"name":'carry'},{$addToset: {subject:{$each: ["hindi","english"]}}});
+MongoServerError: Unknown modifier: $addToset. Expected a valid update modifier or pipeline-style update specified as an array
+most>
+
+
+MongoServerError: Unknown modifier: $addToset. Expected a valid update modifier or pipeline-style update specified as an array
+most> db.cost.updateOne({"name":'carry'},{$addToSet: {subject:{$each: ["hindi","english"]}}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.cost.find();
+[
+  { _id: ObjectId('66176a82dc6445d82316c9b5') },
+  { _id: ObjectId('66176a91dc6445d82316c9b6') },
+  {
+    _id: ObjectId('66176aebdc6445d82316c9b7'),
+    name: 'john',
+    age: 20,
+    subject: [ 'math', 'science' ]
+  },
+  {
+    _id: ObjectId('66176bcedc6445d82316c9b8'),
+    name: 'smith',
+    age: 21,
+    subject: [ 'math', 'science' ]
+  },
+  {
+    _id: ObjectId('66176bcedc6445d82316c9b9'),
+    name: 'carry',
+    age: 18,
+    subject: [ 'hindi', 'english' ]
+  }
+]
+most>
+
+most> db.cost.updateOne({"name":'carry'},{$addToSet: {language:{$each: ["hindi","english"]}}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.cost.find();
+[
+  { _id: ObjectId('66176a82dc6445d82316c9b5') },
+  { _id: ObjectId('66176a91dc6445d82316c9b6') },
+  {
+    _id: ObjectId('66176aebdc6445d82316c9b7'),
+    name: 'john',
+    age: 20,
+    subject: [ 'math', 'science' ]
+  },
+  {
+    _id: ObjectId('66176bcedc6445d82316c9b8'),
+    name: 'smith',
+    age: 21,
+    subject: [ 'math', 'science' ]
+  },
+  {
+    _id: ObjectId('66176bcedc6445d82316c9b9'),
+    name: 'carry',
+    age: 18,
+    subject: [ 'hindi', 'english' ],
+    language: [ 'hindi', 'english' ]
+  }
+]
+
+
+
+MongoServerError: The argument to $each in $addToSet must be an array but it was of type string
+most> db.cost.updateOne({"name":'carry'},{$addToSet: {marks:{$each: ['60','70']}}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.cost.find();
+[
+  { _id: ObjectId('66176a82dc6445d82316c9b5') },
+  { _id: ObjectId('66176a91dc6445d82316c9b6') },
+  {
+    _id: ObjectId('66176aebdc6445d82316c9b7'),
+    name: 'john',
+    age: 20,
+    subject: [ 'math', 'science' ]
+  },
+  {
+    _id: ObjectId('66176bcedc6445d82316c9b8'),
+    name: 'smith',
+    age: 21,
+    subject: [ 'math', 'science' ]
+  },
+  {
+    _id: ObjectId('66176bcedc6445d82316c9b9'),
+    name: 'carry',
+    age: 18,
+    subject: [ 'hindi', 'english' ],
+    language: [ 'hindi', 'english' ],
+    marks: [ '60', '70' ]
+  }
+]
+most>
+
+
+
+
+17/04/2024
+
+ows [Version 10.0.22631.3447]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Admin>mongosh
+Current Mongosh Log ID: 661f44ed05333c20e116c9b4
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.3
+Using MongoDB:          7.0.8
+Using Mongosh:          2.2.3
+mongosh 2.2.4 is available for download: https://www.mongodb.com/try/download/shell
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-04-13T15:15:28.533+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> use cost;
+switched to db cost
+cost> db.salesman_master.find()
+
+cost> db.salesman_master.find();
+
+cost> show tables;
+
+cost> use most;
+switched to db most
+most> show tables;
+client_master
+cost
+product_master
+salesman_master
+most> db.salesman_master.find();
+[
+  {
+    _id: ObjectId('6619546df6a639476c16c9b5'),
+    saleamanno: 'S00001',
+    name: 'aman',
+    address1: 'a/14',
+    address2: 'worli',
+    city: 'mumbai',
+    pincode: 400002,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 100,
+    ytd: 50,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b6'),
+    saleamanno: 'S00002',
+    name: 'omkar',
+    address1: 65,
+    address2: 'nariman',
+    city: 'mumbai',
+    pincode: 400001,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b7'),
+    saleamanno: 'S00003',
+    name: 'raj',
+    address1: 'p-7',
+    address2: 'bandra',
+    city: 'mumbai',
+    pincode: 400032,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b8'),
+    saleamanno: 'S00004',
+    name: 'ashish',
+    address1: 'a/5',
+    address2: 'juhu',
+    city: 'mumbai',
+    pincode: 400044,
+    state: 'maharashtra',
+    salamt: 3500,
+    tgttoget: 200,
+    ytd: 150,
+    remarks: 'good'
+  }
+]
+most> db.cost.updateOne({"name":'ashish'},{$addToSet: {query:{$each: ['ok','thanks']}}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+most> db.salesman_master.find();
+[
+  {
+    _id: ObjectId('6619546df6a639476c16c9b5'),
+    saleamanno: 'S00001',
+    name: 'aman',
+    address1: 'a/14',
+    address2: 'worli',
+    city: 'mumbai',
+    pincode: 400002,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 100,
+    ytd: 50,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b6'),
+    saleamanno: 'S00002',
+    name: 'omkar',
+    address1: 65,
+    address2: 'nariman',
+    city: 'mumbai',
+    pincode: 400001,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b7'),
+    saleamanno: 'S00003',
+    name: 'raj',
+    address1: 'p-7',
+    address2: 'bandra',
+    city: 'mumbai',
+    pincode: 400032,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b8'),
+    saleamanno: 'S00004',
+    name: 'ashish',
+    address1: 'a/5',
+    address2: 'juhu',
+    city: 'mumbai',
+    pincode: 400044,
+    state: 'maharashtra',
+    salamt: 3500,
+    tgttoget: 200,
+    ytd: 150,
+    remarks: 'good'
+  }
+]
+most> db.cost.updateOne({"name":'ashish'},{$addToSet: {query:{$each: ['ok','thanks']}}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+most> db.salesman_master.find();
+[
+  {
+    _id: ObjectId('6619546df6a639476c16c9b5'),
+    saleamanno: 'S00001',
+    name: 'aman',
+    address1: 'a/14',
+    address2: 'worli',
+    city: 'mumbai',
+    pincode: 400002,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 100,
+    ytd: 50,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b6'),
+    saleamanno: 'S00002',
+    name: 'omkar',
+    address1: 65,
+    address2: 'nariman',
+    city: 'mumbai',
+    pincode: 400001,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b7'),
+    saleamanno: 'S00003',
+    name: 'raj',
+    address1: 'p-7',
+    address2: 'bandra',
+    city: 'mumbai',
+    pincode: 400032,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b8'),
+    saleamanno: 'S00004',
+    name: 'ashish',
+    address1: 'a/5',
+    address2: 'juhu',
+    city: 'mumbai',
+    pincode: 400044,
+    state: 'maharashtra',
+    salamt: 3500,
+    tgttoget: 200,
+    ytd: 150,
+    remarks: 'good'
+  }
+]
+most> db.cost.updateOne({"name":'ashish'},{$pu};
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:41)
+
+> 1 | db.cost.updateOne({"name":'ashish'},{$pu};
+    |                                          ^
+  2 |
+
+most> db.cost.updateOne({"name":'ashish'},{$push: {query:{$each: ['ok','thanks']}}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+most> db.salesman_master.find();
+[
+  {
+    _id: ObjectId('6619546df6a639476c16c9b5'),
+    saleamanno: 'S00001',
+    name: 'aman',
+    address1: 'a/14',
+    address2: 'worli',
+    city: 'mumbai',
+    pincode: 400002,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 100,
+    ytd: 50,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b6'),
+    saleamanno: 'S00002',
+    name: 'omkar',
+    address1: 65,
+    address2: 'nariman',
+    city: 'mumbai',
+    pincode: 400001,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b7'),
+    saleamanno: 'S00003',
+    name: 'raj',
+    address1: 'p-7',
+    address2: 'bandra',
+    city: 'mumbai',
+    pincode: 400032,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b8'),
+    saleamanno: 'S00004',
+    name: 'ashish',
+    address1: 'a/5',
+    address2: 'juhu',
+    city: 'mumbai',
+    pincode: 400044,
+    state: 'maharashtra',
+    salamt: 3500,
+    tgttoget: 200,
+    ytd: 150,
+    remarks: 'good'
+  }
+]
+most> db.cost.updateOne({"salesmanno":'S00004'},{$push: {query:{$each: ['ok','thanks']}}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+most> db.salesman_master.find();
+[
+  {
+    _id: ObjectId('6619546df6a639476c16c9b5'),
+    saleamanno: 'S00001',
+    name: 'aman',
+    address1: 'a/14',
+    address2: 'worli',
+    city: 'mumbai',
+    pincode: 400002,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 100,
+    ytd: 50,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b6'),
+    saleamanno: 'S00002',
+    name: 'omkar',
+    address1: 65,
+    address2: 'nariman',
+    city: 'mumbai',
+    pincode: 400001,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b7'),
+    saleamanno: 'S00003',
+    name: 'raj',
+    address1: 'p-7',
+    address2: 'bandra',
+    city: 'mumbai',
+    pincode: 400032,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b8'),
+    saleamanno: 'S00004',
+    name: 'ashish',
+    address1: 'a/5',
+    address2: 'juhu',
+    city: 'mumbai',
+    pincode: 400044,
+    state: 'maharashtra',
+    salamt: 3500,
+    tgttoget: 200,
+    ytd: 150,
+    remarks: 'good'
+  }
+]
+most> db.cost.updateOne({"salesmanno":'S00004'},{$addToSet: {query:{$each: ['ok','thanks']}}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+most> db.cost.updateOne({"name":'ashish'},{$addToSet: {query:{$each: ["ok","good"]}}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+most> db.salesman_master.find();
+[
+  {
+    _id: ObjectId('6619546df6a639476c16c9b5'),
+    saleamanno: 'S00001',
+    name: 'aman',
+    address1: 'a/14',
+    address2: 'worli',
+    city: 'mumbai',
+    pincode: 400002,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 100,
+    ytd: 50,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b6'),
+    saleamanno: 'S00002',
+    name: 'omkar',
+    address1: 65,
+    address2: 'nariman',
+    city: 'mumbai',
+    pincode: 400001,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b7'),
+    saleamanno: 'S00003',
+    name: 'raj',
+    address1: 'p-7',
+    address2: 'bandra',
+    city: 'mumbai',
+    pincode: 400032,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b8'),
+    saleamanno: 'S00004',
+    name: 'ashish',
+    address1: 'a/5',
+    address2: 'juhu',
+    city: 'mumbai',
+    pincode: 400044,
+    state: 'maharashtra',
+    salamt: 3500,
+    tgttoget: 200,
+    ytd: 150,
+    remarks: 'good'
+  }
+]
+most> db.cost.updateOne({"name":'ashish'},{$addToSet: {query:{$each: ["ok","never"]}}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+most> db.salesman_master.updateOne({"name":'ashish'},{$addToSet: {query:{$each: ["ok","never"]}}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.salesman_master.find();
+[
+  {
+    _id: ObjectId('6619546df6a639476c16c9b5'),
+    saleamanno: 'S00001',
+    name: 'aman',
+    address1: 'a/14',
+    address2: 'worli',
+    city: 'mumbai',
+    pincode: 400002,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 100,
+    ytd: 50,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b6'),
+    saleamanno: 'S00002',
+    name: 'omkar',
+    address1: 65,
+    address2: 'nariman',
+    city: 'mumbai',
+    pincode: 400001,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b7'),
+    saleamanno: 'S00003',
+    name: 'raj',
+    address1: 'p-7',
+    address2: 'bandra',
+    city: 'mumbai',
+    pincode: 400032,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b8'),
+    saleamanno: 'S00004',
+    name: 'ashish',
+    address1: 'a/5',
+    address2: 'juhu',
+    city: 'mumbai',
+    pincode: 400044,
+    state: 'maharashtra',
+    salamt: 3500,
+    tgttoget: 200,
+    ytd: 150,
+    remarks: 'good',
+    query: [ 'ok', 'never' ]
+  }
+]
+most> db.salesman_master.updateOne({"name":'ashish'},{$addToSet: {query:{$each: "ok","never"}}});
+Uncaught:
+SyntaxError: Unexpected token (1:86)
+
+> 1 | db.salesman_master.updateOne({"name":'ashish'},{$addToSet: {query:{$each: "ok","never"}}});
+    |                                                                                       ^
+  2 |
+
+most> db.salesman_master.updateOne({"name":'ashish'},{$addToSet: {query:{$each: "ok","never"}});
+Uncaught:
+SyntaxError: Unexpected token (1:86)
+
+> 1 | db.salesman_master.updateOne({"name":'ashish'},{$addToSet: {query:{$each: "ok","never"}});
+    |                                                                                       ^
+  2 |
+
+most> db.salesman_master.updateOne({"name":'aman'},{$addToSet: {year:{$each: ["2023","2024"]}}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.salesman_master.find();
+[
+  {
+    _id: ObjectId('6619546df6a639476c16c9b5'),
+    saleamanno: 'S00001',
+    name: 'aman',
+    address1: 'a/14',
+    address2: 'worli',
+    city: 'mumbai',
+    pincode: 400002,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 100,
+    ytd: 50,
+    remarks: 'good',
+    year: [ '2023', '2024' ]
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b6'),
+    saleamanno: 'S00002',
+    name: 'omkar',
+    address1: 65,
+    address2: 'nariman',
+    city: 'mumbai',
+    pincode: 400001,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b7'),
+    saleamanno: 'S00003',
+    name: 'raj',
+    address1: 'p-7',
+    address2: 'bandra',
+    city: 'mumbai',
+    pincode: 400032,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b8'),
+    saleamanno: 'S00004',
+    name: 'ashish',
+    address1: 'a/5',
+    address2: 'juhu',
+    city: 'mumbai',
+    pincode: 400044,
+    state: 'maharashtra',
+    salamt: 3500,
+    tgttoget: 200,
+    ytd: 150,
+    remarks: 'good',
+    query: [ 'ok', 'never' ]
+  }
+]
+most> db.salesman_master.updateOne({"name":'aman'},{$pull: {year:{$each: ["2023","2024"]}}});
+MongoServerError: unknown top level operator: $each. If you have a field name that starts with a '$' symbol, consider using $getField or $setField.
+most> db.salesman_master.updateOne({"name":'aman'},{$pull: {year: ["2023","2024"]}}});
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:77)
+
+> 1 | db.salesman_master.updateOne({"name":'aman'},{$pull: {year: ["2023","2024"]}}});
+    |                                                                              ^
+  2 |
+
+most> db.salesman_master.updateOne({"name":'aman'},{$pull: {year: ["2023","2024"]}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+most> db.salesman_master.find();
+[
+  {
+    _id: ObjectId('6619546df6a639476c16c9b5'),
+    saleamanno: 'S00001',
+    name: 'aman',
+    address1: 'a/14',
+    address2: 'worli',
+    city: 'mumbai',
+    pincode: 400002,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 100,
+    ytd: 50,
+    remarks: 'good',
+    year: [ '2023', '2024' ]
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b6'),
+    saleamanno: 'S00002',
+    name: 'omkar',
+    address1: 65,
+    address2: 'nariman',
+    city: 'mumbai',
+    pincode: 400001,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b7'),
+    saleamanno: 'S00003',
+    name: 'raj',
+    address1: 'p-7',
+    address2: 'bandra',
+    city: 'mumbai',
+    pincode: 400032,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b8'),
+    saleamanno: 'S00004',
+    name: 'ashish',
+    address1: 'a/5',
+    address2: 'juhu',
+    city: 'mumbai',
+    pincode: 400044,
+    state: 'maharashtra',
+    salamt: 3500,
+    tgttoget: 200,
+    ytd: 150,
+    remarks: 'good',
+    query: [ 'ok', 'never' ]
+  }
+]
+most> db.salesman_master.updateOne({"name":'aman'},{$pop: {year: ["2023","2024"]}});
+MongoServerError: Expected a number in: year: [ "2023", "2024" ]
+most> db.salesman_master.updateOne({"name":'aman'},{$pull: {year: {"2023","2024"}}});
+Uncaught:
+SyntaxError: Unexpected token (1:67)
+
+> 1 | db.salesman_master.updateOne({"name":'aman'},{$pull: {year: {"2023","2024"}}});
+    |                                                                    ^
+  2 |
+
+most> db.salesman_master.updateOne({"name":'aman'},{$pull: {year: {"2023"}}});
+Uncaught:
+SyntaxError: Unexpected token (1:67)
+
+> 1 | db.salesman_master.updateOne({"name":'aman'},{$pull: {year: {"2023"}}});
+    |                                                                    ^
+  2 |
+
+most> db.salesman_master.updateOne({"name":'aman'},{$pull: {year: '2023'}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.salesman_master.find();
+[
+  {
+    _id: ObjectId('6619546df6a639476c16c9b5'),
+    saleamanno: 'S00001',
+    name: 'aman',
+    address1: 'a/14',
+    address2: 'worli',
+    city: 'mumbai',
+    pincode: 400002,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 100,
+    ytd: 50,
+    remarks: 'good',
+    year: [ '2024' ]
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b6'),
+    saleamanno: 'S00002',
+    name: 'omkar',
+    address1: 65,
+    address2: 'nariman',
+    city: 'mumbai',
+    pincode: 400001,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b7'),
+    saleamanno: 'S00003',
+    name: 'raj',
+    address1: 'p-7',
+    address2: 'bandra',
+    city: 'mumbai',
+    pincode: 400032,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b8'),
+    saleamanno: 'S00004',
+    name: 'ashish',
+    address1: 'a/5',
+    address2: 'juhu',
+    city: 'mumbai',
+    pincode: 400044,
+    state: 'maharashtra',
+    salamt: 3500,
+    tgttoget: 200,
+    ytd: 150,
+    remarks: 'good',
+    query: [ 'ok', 'never' ]
+  }
+]
+most> db.product_master.updateOne({"productno":'p07975'},{$currentDate:{}};
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:68)
+
+> 1 | db.product_master.updateOne({"productno":'p07975'},{$currentDate:{}};
+    |                                                                     ^
+  2 |
+
+most> db.product_master.updateOne({"productno":'p08865'},{$rename:{"costprice":'price'}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+most> db.product_master.find();
+[
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b5'),
+    productno: 'p00001',
+    description: 'T-shirt',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 200,
+    recorderlvl: 50,
+    sellprice: 350,
+    costprice: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b6'),
+    productno: 'p0345',
+    description: 'shirt',
+    'profit-percent': 6,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 500,
+    costprice: 350
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b7'),
+    productno: 'p06734',
+    description: 'cotton jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 600,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b8'),
+    productno: 'p07865',
+    description: 'jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 750,
+    costprice: 500
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b9'),
+    productno: 'p07868',
+    description: 'Trousers',
+    'profit-percent': 2,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 850,
+    costprice: 550
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9ba'),
+    productno: 'p07885',
+    description: 'pull overs',
+    'profit-percent': '2.5',
+    'unit-measure': 'piecs',
+    qtyonhand: 80,
+    recorderlvl: 30,
+    sellprice: 700,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bb'),
+    productno: 'p07965',
+    description: 'denim shirt',
+    'profit-percent': 4,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 40,
+    sellprice: 350,
+    costprice: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bc'),
+    productno: 'p07975',
+    description: 'ltera tops',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 70,
+    recorderlvl: 0,
+    sellprice: 300,
+    price: 175
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bd'),
+    productno: 'p08865',
+    description: 'skirts',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 75,
+    recorderlvl: 30,
+    sellprice: 450,
+    decsription: 'shirt'
+  }
+]
+most> db.product_master.updateOne({"productno":'p07965'},{$rename:{"costprice":'price'}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.product_master.find();
+[
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b5'),
+    productno: 'p00001',
+    description: 'T-shirt',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 200,
+    recorderlvl: 50,
+    sellprice: 350,
+    costprice: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b6'),
+    productno: 'p0345',
+    description: 'shirt',
+    'profit-percent': 6,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 500,
+    costprice: 350
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b7'),
+    productno: 'p06734',
+    description: 'cotton jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 600,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b8'),
+    productno: 'p07865',
+    description: 'jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 750,
+    costprice: 500
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b9'),
+    productno: 'p07868',
+    description: 'Trousers',
+    'profit-percent': 2,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 850,
+    costprice: 550
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9ba'),
+    productno: 'p07885',
+    description: 'pull overs',
+    'profit-percent': '2.5',
+    'unit-measure': 'piecs',
+    qtyonhand: 80,
+    recorderlvl: 30,
+    sellprice: 700,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bb'),
+    productno: 'p07965',
+    description: 'denim shirt',
+    'profit-percent': 4,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 40,
+    sellprice: 350,
+    price: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bc'),
+    productno: 'p07975',
+    description: 'ltera tops',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 70,
+    recorderlvl: 0,
+    sellprice: 300,
+    price: 175
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bd'),
+    productno: 'p08865',
+    description: 'skirts',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 75,
+    recorderlvl: 30,
+    sellprice: 450,
+    decsription: 'shirt'
+  }
+]
+most> db.client_master.find();
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0
+  }
+]
+most> db.client_master.inserOne({"})
+Uncaught:
+SyntaxError: Unterminated string constant. (1:27)
+
+> 1 | db.client_master.inserOne({"})
+    |                            ^
+  2 |
+
+most> db.client_master.inserOne({lastName:"mongo",lastUpdate: new Date()});
+TypeError: db.client_master.inserOne is not a function
+most> db.client_master.insertOne({lastName:"mongo",lastUpdate: new Date()});
+{
+  acknowledged: true,
+  insertedId: ObjectId('661f4ca505333c20e116c9b5')
+}
+most> db.client_master.find();
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastName: 'mongo',
+    lastUpdate: ISODate('2024-04-17T04:14:29.270Z')
+  }
+most> db.client_master.updateOne({lastName:"mongo"},{$currentDate:{lastUpdate:true}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.client_master.find();
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastName: 'mongo',
+    lastUpdate: ISODate('2024-04-17T04:19:50.314Z')
+  }
+most> db.client_master.updateOne({name:"deepak sharma",{$currentDate:{$lastUpdate:{$type:"timestamp"}}})
+;
+Uncaught:
+SyntaxError: Unexpected token (1:49)
+
+> 1 | db.client_master.updateOne({name:"deepak sharma",{$currentDate:{$lastUpdate:{$type:"timestamp"}}});
+    |                                                  ^
+  2 |
+
+most> db.client_master.updateOne({name:"deepak sharma"},{$currentDate:{$lastUpdate:{$type:"timestamp"}}});
+MongoServerError: The dollar ($) prefixed field '$lastUpdate' in '$lastUpdate' is not allowed in the context of an update's replacement document. Consider using an aggregation pipeline with $replaceWith.
+most> db.client_master.updateOne(name:"deepak sharma",{$currentDate:{$lastUpdate:{$type:"timestamp"}}});
+
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:31)
+
+> 1 | db.client_master.updateOne(name:"deepak sharma",{$currentDate:{$lastUpdate:{$type:"timestamp"}}});
+    |                                ^
+  2 |
+
+most> db.client_master.updateOne({name:"deepak sharma"},{$currentDate:{$lastUpdated:{$type:"timestamp"}}})
+MongoServerError: The dollar ($) prefixed field '$lastUpdated' in '$lastUpdated' is not allowed in the context of an update's replacement document. Consider using an aggregation pipeline with $replaceWith.
+most> db.client_master.updateOne({name:"deepak sharma"},{$currentDate:{$lastUpdated:{$type:"timestamp"}}});
+most>
+most> db.client_master.updateOne({clientno:"C00006"},{$currentDate:{$lastUpdated:{$type:"timestamp"}}})
+MongoServerError: The dollar ($) prefixed field '$lastUpdated' in '$lastUpdated' is not allowed in the context of an update's replacement document. Consider using an aggregation pipeline with $replaceWith.
+most> db.client_master.updateOne({clientno:"C00006db.product_master.updateOne({"productno":'p08865'},{$rename:{"costprice":'price'}});"},{$currentDate:{$lastUpdated:{$type:"timestamp"}}});
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:74)
+
+> 1 | db.client_master.updateOne({clientno:"C00006db.product_master.updateOne({"productno":'p08865'},{$rename:{"costprice":'price'}});"},{$currentDate:{$lastUpdated:{$type:"timestamp"}}});
+    |                                                                           ^
+  2 |
+
+most> db.client_master.updateOne({clientno:"C00006db.product_master.updateOne({"productno":'p08865'},{$rename:{"costprice":'price'}});"},{$currentDate:{$lastUpdated:{$type:"timestamp"}}});
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:74)
+
+> 1 | db.client_master.updateOne({clientno:"C00006db.product_master.updateOne({"productno":'p08865'},{$rename:{"costprice":'price'}});"},{$currentDate:{$lastUpdated:{$type:"timestamp"}}});
+    |                                                                           ^
+  2 |
+
+most> db.client_master.updateOne({clientno:"C00006"},{$currentDate:{$lastUpdated:{$type:"timestamp"}}});
+MongoServerError: The dollar ($) prefixed field '$lastUpdated' in '$lastUpdated' is not allowed in the context of an update's replacement document. Consider using an aggregation pipeline with $replaceWith.
+most> db.product_master.updateOne({db.product_master.updateOne({"productno":'p08865'}
+most> db.product_master.updateOne({lastname:"mongo"},{$currentDate:{$lastUpdated:{$type:"timestamp"}}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+most> db.product_master.find();
+[
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b5'),
+    productno: 'p00001',
+    description: 'T-shirt',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 200,
+    recorderlvl: 50,
+    sellprice: 350,
+    costprice: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b6'),
+    productno: 'p0345',
+    description: 'shirt',
+    'profit-percent': 6,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 500,
+    costprice: 350
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b7'),
+    productno: 'p06734',
+    description: 'cotton jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 600,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b8'),
+    productno: 'p07865',
+    description: 'jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 750,
+    costprice: 500
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b9'),
+    productno: 'p07868',
+    description: 'Trousers',
+    'profit-percent': 2,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 850,
+    costprice: 550
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9ba'),
+    productno: 'p07885',
+    description: 'pull overs',
+    'profit-percent': '2.5',
+    'unit-measure': 'piecs',
+    qtyonhand: 80,
+    recorderlvl: 30,
+    sellprice: 700,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bb'),
+    productno: 'p07965',
+    description: 'denim shirt',
+    'profit-percent': 4,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 40,
+    sellprice: 350,
+    price: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bc'),
+    productno: 'p07975',
+    description: 'ltera tops',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 70,
+    recorderlvl: 0,
+    sellprice: 300,
+    price: 175
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bd'),
+    productno: 'p08865',
+    description: 'skirts',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 75,
+    recorderlvl: 30,
+    sellprice: 450,
+    decsription: 'shirt'
+  }
+]
+most> db.product_master.updateOne({lastname:"mongo"},{$currentDate:{lastUpdateddb.product_master.updateOne({"productno":'p08865'},{$rename:{"costprice":'price'}});}})
+most> db.client_master.updateOne({lastName:"ankush"},{$currentDate:{lastUpdate:true}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+most> db.client_master.find();
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastName: 'mongo',
+    lastUpdate: ISODate('2024-04-17T04:19:50.314Z')
+  }
+]
+most> db.client_master.updateOne({lastName:"ankush"},{$currentDate:{lastUpdate:{$type:"timestamp"}}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+most> db.client_master.find();
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastName: 'mongo',
+    lastUpdate: ISODate('2024-04-17T04:19:50.314Z')
+  }
+]
+most> db.client_master.updateOne({lastName:"mongo"},{$rename:{"lastName":"name"}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.client_master.find();
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: ISODate('2024-04-17T04:19:50.314Z'),
+    name: 'mongo'
+  }
+]
+most> db.client_master.updateOne({name:"mongo"},{$currentDate:{lastUpdate:{$type:"timestamp"}}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.client_master.find();
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo'
+  }
+]
+most> db.client_master.updateOne({lastName:"mongo"},{$rename:{"lastName":"name"}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+most> db.client_master.updateOne({clientno:"C00006"},{$push:{"reward":"nothing"}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.client_master.find();
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0,
+    reward: [ 'nothing' ]
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo'
+  }
+]
+most> db.client_master.updateOne({clientno:"C00006"},{$pull:{"reward":"nothing"}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.client_master.find();
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0,
+    reward: []
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo'
+  }
+]
+most> db.client_master.updateOne({clientno:"C00006"},{$addToSet:{$each:{"reward":"nothing"}});
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:86)
+
+> 1 | db.client_master.updateOne({clientno:"C00006"},{$addToSet:{$each:{"reward":"nothing"}});
+    |                                                                                       ^
+  2 |
+
+most> db.client_master.updateOne({clientno:"C00006"},{$addToSet:{$each:{"reward":"nothing"}}});
+MongoServerError: The dollar ($) prefixed field '$each' in '$each' is not allowed in the context of an update's replacement document. Consider using an aggregation pipeline with $replaceWith.
+most> db.client_master.updateOne({clientno:"C00005"},{$addToSet:{$each:{"reward":"nothing"}}});
+MongoServerError: The dollar ($) prefixed field '$each' in '$each' is not allowed in the context of an update's replacement document. Consider using an aggregation pipeline with $replaceWith.
+most> db.client_master.updateOne({clientno:"C00005"},{$addToSet:{$each:{"reward":["nothing","everything"]}}});
+MongoServerError: The dollar ($) prefixed field '$each' in '$each' is not allowed in the context of an update's replacement document. Consider using an aggregation pipeline with $replaceWith.
+most> db.client_master.updateOne({clientno:"C00005"},{$addToSet:{reward:{$each:["nothing","everything"]}}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.client_master.find();
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'nothing', 'everything' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0,
+    reward: []
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo'
+  }
+]
+most> db.client_master.updateOne({clientno:"C00005"},{$addToSet:{$pull:{reward:'nothing'}});
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:84)
+
+> 1 | db.client_master.updateOne({clientno:"C00005"},{$addToSet:{$pull:{reward:'nothing'}});
+    |                                                                                     ^
+  2 |
+
+most> db.client_master.updateOne({clientno:"C00005"},{$addToSet:{$pull:{reward:'nothing'}}});
+MongoServerError: The dollar ($) prefixed field '$pull' in '$pull' is not allowed in the context of an update's replacement document. Consider using an aggregation pipeline with $replaceWith.
+most> db.client_master.updateOne({clientno:"C00005"},{$pull:{reward:'nothing'}}});
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:73)
+
+> 1 | db.client_master.updateOne({clientno:"C00005"},{$pull:{reward:'nothing'}}});
+    |                                                                          ^
+  2 |
+
+most> db.client_master.updateOne({clientno:"C00005"},{$pull:{reward:{$in:['nothing']}}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.client_master.updateOne({clientno:"C00005"},{$push:{reward:['next']}}});
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:72)
+
+> 1 | db.client_master.updateOne({clientno:"C00005"},{$push:{reward:['next']}}});
+    |                                                                         ^
+  2 |
+
+most> db.client_master.updateOne({clientno:"C00005"},{$push:{reward:['next']}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.client_master.find();
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ] ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0,
+    reward: []
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo'
+  }
+]
+most>
+
+}
+most>  db.client_master.updateOne({name:"deepak sharma"},{$currentDate:{lastUpdate:true}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.client_master.find();
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ] ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0,
+    reward: [],
+    lastUpdate: ISODate('2024-04-17T05:11:05.715Z')
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo'
+  }
+]
+most>  db.client_master.updateOne({name:"deepak sharma"},{$currentDate:{lastUpdate:true}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.client_master.updateOne({name:"deepak sharma"},{$currentDate:{lastUpdate:{$type:"timestamp"}}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most>
+
+
+
+Microsoft Windows [Version 10.0.22631.3447]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Admin>mongosh
+Current Mongosh Log ID: 6621e76852bba9703816c9b4
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.3
+Using MongoDB:          7.0.8
+Using Mongosh:          2.2.3
+mongosh 2.2.4 is available for download: https://www.mongodb.com/try/download/shell
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-04-13T15:15:28.533+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> use most;
+switched to db most
+most> show tables;
+client_master
+cost
+product_master
+salesman_master
+most> db.cost.find();
+[
+  { _id: ObjectId('66176a82dc6445d82316c9b5') },
+  { _id: ObjectId('66176a91dc6445d82316c9b6') },
+  {
+    _id: ObjectId('66176aebdc6445d82316c9b7'),
+    name: 'john',
+    age: 20,
+    subject: [ 'math', 'science' ]
+  },
+  {
+    _id: ObjectId('66176bcedc6445d82316c9b8'),
+    name: 'smith',
+    age: 21,
+    subject: [ 'math', 'science' ]
+  },
+  {
+    _id: ObjectId('66176bcedc6445d82316c9b9'),
+    name: 'carry',
+    age: 18,
+    subject: [ 'hindi', 'english' ],
+    language: [ 'hindi', 'english' ],
+    marks: [ '60', '70' ]
+  }
+]
+most> db.client_master.deleteOne({name:"carry"});
+{ acknowledged: true, deletedCount: 0 }
+most> db.cost.find();
+[
+  { _id: ObjectId('66176a82dc6445d82316c9b5') },
+  { _id: ObjectId('66176a91dc6445d82316c9b6') },
+  {
+    _id: ObjectId('66176aebdc6445d82316c9b7'),
+    name: 'john',
+    age: 20,
+    subject: [ 'math', 'science' ]
+  },
+  {
+    _id: ObjectId('66176bcedc6445d82316c9b8'),
+    name: 'smith',
+    age: 21,
+    subject: [ 'math', 'science' ]
+  },
+  {
+    _id: ObjectId('66176bcedc6445d82316c9b9'),
+    name: 'carry',
+    age: 18,
+    subject: [ 'hindi', 'english' ],
+    language: [ 'hindi', 'english' ],
+    marks: [ '60', '70' ]
+  }
+]
+most> db.client_master.deleteOne({"name":'carry'});
+{ acknowledged: true, deletedCount: 0 }
+most> db.cost.deleteOne({"name":'carry'});
+{ acknowledged: true, deletedCount: 1 }
+most> db.cost.find();
+[
+  { _id: ObjectId('66176a82dc6445d82316c9b5') },
+  { _id: ObjectId('66176a91dc6445d82316c9b6') },
+  {
+    _id: ObjectId('66176aebdc6445d82316c9b7'),
+    name: 'john',
+    age: 20,
+    subject: [ 'math', 'science' ]
+  },
+  {
+    _id: ObjectId('66176bcedc6445d82316c9b8'),
+    name: 'smith',
+    age: 21,
+    subject: [ 'math', 'science' ]
+  }
+]
+most> db.cost.deleteMany({});
+{ acknowledged: true, deletedCount: 4 }
+most> db.cost.find();
+
+most>
+
+
+
+
+on 10.0.22631.3447]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Admin>mongosh
+Current Mongosh Log ID: 662343105816ec948116c9b4
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.3
+Using MongoDB:          7.0.8
+Using Mongosh:          2.2.3
+mongosh 2.2.4 is available for download: https://www.mongodb.com/try/download/shell
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-04-13T15:15:28.533+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> use most
+switched to db most
+most> db.product_master({"saleprice": { $eq : 500 }})
+TypeError: db.product_master is not a function
+most> use most
+already on db most
+most> show tables
+client_master
+product_master
+salesman_master
+most> db.client_master.find()
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000,
+    nothing: [ 'never', 'next' ],
+    even: [ 'never', 'next' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ], [ 'next' ], [ 'next' ] ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0,
+    reward: [],
+    lastUpdate: Timestamp({ t: 1713330839, i: 1 }),
+    nothing: [ 'never' ],
+    ever: [ 'no', 'more' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo',
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.client_master({"baldue": { $eq : 20000 }})
+TypeError: db.client_master is not a function
+most> db.client_master({"baldue":{ $eq : '20000' }});
+TypeError: db.client_master is not a function
+most> db.client_master.find({"baldue":{ $eq : '20000' }});
+
+most> db.client_master.find({"baldue":{ $eq : 20000 }});
+[
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ], [ 'next' ], [ 'next' ] ],
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.client_master.find({"baldue":{ $leq : 20000 }});
+MongoServerError[BadValue]: unknown operator: $leq
+most> db.client_master.find({"baldue":{ $lte : 20000 }});
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000,
+    nothing: [ 'never', 'next' ],
+    even: [ 'never', 'next' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ], [ 'next' ], [ 'next' ] ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0,
+    reward: [],
+    lastUpdate: Timestamp({ t: 1713330839, i: 1 }),
+    nothing: [ 'never' ],
+    ever: [ 'no', 'more' ],
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.client_master.find({"baldue":{ $lte : 10000 }});
+[
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0,
+    reward: [],
+    lastUpdate: Timestamp({ t: 1713330839, i: 1 }),
+    nothing: [ 'never' ],
+    ever: [ 'no', 'more' ],
+    or: [ 'some', 'more' ]
+  }
+]
+most>
+
+22/4/2024
+Microsoft Windows [Version 10.0.22631.3447]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Admin>mongosh
+Current Mongosh Log ID: 6625dde0ded65a655e16c9b4
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.3
+Using MongoDB:          7.0.8
+Using Mongosh:          2.2.3
+mongosh 2.2.4 is available for download: https://www.mongodb.com/try/download/shell
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-04-13T15:15:28.533+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> show dbs
+admin    40.00 KiB
+cart     44.00 KiB
+config   72.00 KiB
+local    72.00 KiB
+most    184.00 KiB
+test    120.00 KiB
+test> use most;
+switched to db most
+most> show tables;
+client_master
+product_master
+salesman_master
+most> db.client_master.find({"baldue":{ $gte : 10000 }});
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000,
+    nothing: [ 'never', 'next' ],
+    even: [ 'never', 'next' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ], [ 'next' ], [ 'next' ] ],
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.client_master.find({"baldue":{ $neq : 10000 }});
+MongoServerError[BadValue]: unknown operator: $neq
+most> db.client_master.find({"baldue":{ $ne : 10000 }});
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000,
+    nothing: [ 'never', 'next' ],
+    even: [ 'never', 'next' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ], [ 'next' ], [ 'next' ] ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0,
+    reward: [],
+    lastUpdate: Timestamp({ t: 1713330839, i: 1 }),
+    nothing: [ 'never' ],
+    ever: [ 'no', 'more' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo',
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.client_master.find({"baldue":{ $ne : 10000 }});
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000,
+    nothing: [ 'never', 'next' ],
+    even: [ 'never', 'next' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ], [ 'next' ], [ 'next' ] ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0,
+    reward: [],
+    lastUpdate: Timestamp({ t: 1713330839, i: 1 }),
+    nothing: [ 'never' ],
+    ever: [ 'no', 'more' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo',
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.client_master.find({"baldue":{ $ne : 10000 }});
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000,
+    nothing: [ 'never', 'next' ],
+    even: [ 'never', 'next' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ], [ 'next' ], [ 'next' ] ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0,
+    reward: [],
+    lastUpdate: Timestamp({ t: 1713330839, i: 1 }),
+    nothing: [ 'never' ],
+    ever: [ 'no', 'more' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo',
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.client_master.find({city:{$in:["mumbai"]}});
+[
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ], [ 'next' ], [ 'next' ] ],
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.client_master.find({city:{$in:["mumbai","bangolar"]}});
+[
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ], [ 'next' ], [ 'next' ] ],
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.client_master.find({city:{$nin:["mumbai","bangolar"]}});
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000,
+    nothing: [ 'never', 'next' ],
+    even: [ 'never', 'next' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0,
+    reward: [],
+    lastUpdate: Timestamp({ t: 1713330839, i: 1 }),
+    nothing: [ 'never' ],
+    ever: [ 'no', 'more' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo',
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.client_master.find({$and:[{city:"mumbai"},{name:"deepak sharma"}]});
+
+most> db.client_master.find({$and:[{city:"bangolar"},{name:"deepak sharma"}]});
+
+most> db.client_master.find({$and:[{city:"mangolar"},{name:"deepak sharma"}]});
+
+most> db.client_master.find();
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000,
+    nothing: [ 'never', 'next' ],
+    even: [ 'never', 'next' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ], [ 'next' ], [ 'next' ] ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0,
+    reward: [],
+    lastUpdate: Timestamp({ t: 1713330839, i: 1 }),
+    nothing: [ 'never' ],
+    ever: [ 'no', 'more' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo',
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.client_master.find({$and:[{city:"mumbai"},{pincode:40060}]})
+
+most> db.client_master.find({$and:[{city:"mumbai"},{pincode:400060}]})
+[
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ], [ 'next' ], [ 'next' ] ],
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.client_master.find({$and:[{city:"manglor"},{name:"deepak sharma"}]});
+
+most> db.client_master.find({$and:[{city:"manglore"},{name:"deepak sharma"}]});
+[
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0,
+    reward: [],
+    lastUpdate: Timestamp({ t: 1713330839, i: 1 }),
+    nothing: [ 'never' ],
+    ever: [ 'no', 'more' ],
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.client_master.find({$or:[{city:"mumbai"},{name:"deepak sharma"}]});
+[
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ], [ 'next' ], [ 'next' ] ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0,
+    reward: [],
+    lastUpdate: Timestamp({ t: 1713330839, i: 1 }),
+    nothing: [ 'never' ],
+    ever: [ 'no', 'more' ],
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.client_master.find({$or:[{city:"mumbai"},{name:"deepak sharma"}]});db.cilent_master.find({"City":{$not:{$eq:"Mumbai"}}});
+
+most> db.cilent_master.find({"City":{$not:{$eq:"Mumbai"}}});
+
+most> db.cilent_master.find({"city":{$not:{$eq:"mumbai"}}});
+
+most> db.client_master.find({"city":{$not:{$eq:"mumbai"}}});
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000,
+    nothing: [ 'never', 'next' ],
+    even: [ 'never', 'next' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0,
+    reward: [],
+    lastUpdate: Timestamp({ t: 1713330839, i: 1 }),
+    nothing: [ 'never' ],
+    ever: [ 'no', 'more' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo',
+    or: [ 'some', 'more' ]
+  }
+]
+
+
+
+Microsoft Windows [Version 10.0.22631.3447]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Admin>mongosh
+Current Mongosh Log ID: 6625ee0e63b368b3ae16c9b4
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.3
+Using MongoDB:          7.0.8
+Using Mongosh:          2.2.3
+mongosh 2.2.4 is available for download: https://www.mongodb.com/try/download/shell
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-04-13T15:15:28.533+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> use most
+switched to db most
+most> db.client_master.find()
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000,
+    nothing: [ 'never', 'next' ],
+    even: [ 'never', 'next' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ], [ 'next' ], [ 'next' ] ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0,
+    reward: [],
+    lastUpdate: Timestamp({ t: 1713330839, i: 1 }),
+    nothing: [ 'never' ],
+    ever: [ 'no', 'more' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo',
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.client_master.find({$in:{city:["mumbai","madras"]}});
+MongoServerError[BadValue]: unknown top level operator: $in. If you have a field name that starts with a '$' symbol, consider using $getField or $setField.
+most> db.client_master.find({$in:{$city:["mumbai","madras"]}});
+MongoServerError[BadValue]: unknown top level operator: $in. If you have a field name that starts with a '$' symbol, consider using $getField or $setField.
+most> db.client_master.find({$in:{city:["mumbai","madras"]}});
+MongoServerError[BadValue]: unknown top level operator: $in. If you have a field name that starts with a '$' symbol, consider using $getField or $setField.
+most> db.client_master.find({city:{$in:["mumbai","madras"]}});
+[
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ], [ 'next' ], [ 'next' ] ],
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.client_master.find({city:{$nin:["mumbai","madras"]}});
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000,
+    nothing: [ 'never', 'next' ],
+    even: [ 'never', 'next' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0,
+    reward: [],
+    lastUpdate: Timestamp({ t: 1713330839, i: 1 }),
+    nothing: [ 'never' ],
+    ever: [ 'no', 'more' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo',
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.client_master.find({city:{$nin:["mumbai"]}});
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000,
+    nothing: [ 'never', 'next' ],
+    even: [ 'never', 'next' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0,
+    reward: [],
+    lastUpdate: Timestamp({ t: 1713330839, i: 1 }),
+    nothing: [ 'never' ],
+    ever: [ 'no', 'more' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo',
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.client_master.find({city:{$in:["mumbai"]}});
+[
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ], [ 'next' ], [ 'next' ] ],
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.client_master.find({salary:{$eq:15000}});
+
+most> db.client_master.find({baldue:{$eq:15000}});
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000,
+    nothing: [ 'never', 'next' ],
+    even: [ 'never', 'next' ],
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.saleaman_master.find()
+
+most> show tables
+client_master
+product_master
+salesman_master
+most> show tables;
+client_master
+product_master
+salesman_master
+most> db.salesman_master.find()
+[
+  {
+    _id: ObjectId('6619546df6a639476c16c9b5'),
+    saleamanno: 'S00001',
+    name: 'aman',
+    address1: 'a/14',
+    address2: 'worli',
+    city: 'mumbai',
+    pincode: 400002,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 100,
+    ytd: 50,
+    remarks: 'good',
+    year: [ '2024' ]
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b6'),
+    saleamanno: 'S00002',
+    name: 'omkar',
+    address1: 65,
+    address2: 'nariman',
+    city: 'mumbai',
+    pincode: 400001,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b7'),
+    saleamanno: 'S00003',
+    name: 'raj',
+    address1: 'p-7',
+    address2: 'bandra',
+    city: 'mumbai',
+    pincode: 400032,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b8'),
+    saleamanno: 'S00004',
+    name: 'ashish',
+    address1: 'a/5',
+    address2: 'juhu',
+    city: 'mumbai',
+    pincode: 400044,
+    state: 'maharashtra',
+    salamt: 3500,
+    tgttoget: 200,
+    ytd: 150,
+    remarks: 'good',
+    query: [ 'ok', 'never' ]
+  }
+]
+most> db.saleaman
+most.saleaman
+most> db.salesman_master.updateMany({city:"mumbai"} {$set:{city:'pune')}});
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:46)
+
+> 1 | db.salesman_master.updateMany({city:"mumbai"} {$set:{city:'pune')}});
+    |                                               ^
+  2 |
+
+most> db.salesman_master.updateMany({city:"mumbai"} {$set:{"city":'pune'}});
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:46)
+
+> 1 | db.salesman_master.updateMany({city:"mumbai"} {$set:{"city":'pune'}});
+    |                                               ^
+  2 |
+
+most> db.salesman_master.updateMany({city:"mumbai"} ,{$set:{"city":'pune'}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 4,
+  modifiedCount: 4,
+  upsertedCount: 0
+}
+most> db.salesman_master.find()
+[
+  {
+    _id: ObjectId('6619546df6a639476c16c9b5'),
+    saleamanno: 'S00001',
+    name: 'aman',
+    address1: 'a/14',
+    address2: 'worli',
+    city: 'pune',
+    pincode: 400002,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 100,
+    ytd: 50,
+    remarks: 'good',
+    year: [ '2024' ]
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b6'),
+    saleamanno: 'S00002',
+    name: 'omkar',
+    address1: 65,
+    address2: 'nariman',
+    city: 'pune',
+    pincode: 400001,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b7'),
+    saleamanno: 'S00003',
+    name: 'raj',
+    address1: 'p-7',
+    address2: 'bandra',
+    city: 'pune',
+    pincode: 400032,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b8'),
+    saleamanno: 'S00004',
+    name: 'ashish',
+    address1: 'a/5',
+    address2: 'juhu',
+    city: 'pune',
+    pincode: 400044,
+    state: 'maharashtra',
+    salamt: 3500,
+    tgttoget: 200,
+    ytd: 150,
+    remarks: 'good',
+    query: [ 'ok', 'never' ]
+  }
+]
+most> db.salesman_master.updateMany({saleamanno:"S00003"} ,{$set:{"state":'bangolar'}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.salesman_master.find()
+[
+  {
+    _id: ObjectId('6619546df6a639476c16c9b5'),
+    saleamanno: 'S00001',
+    name: 'aman',
+    address1: 'a/14',
+    address2: 'worli',
+    city: 'pune',
+    pincode: 400002,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 100,
+    ytd: 50,
+    remarks: 'good',
+    year: [ '2024' ]
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b6'),
+    saleamanno: 'S00002',
+    name: 'omkar',
+    address1: 65,
+    address2: 'nariman',
+    city: 'pune',
+    pincode: 400001,
+    state: 'maharashtra',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b7'),
+    saleamanno: 'S00003',
+    name: 'raj',
+    address1: 'p-7',
+    address2: 'bandra',
+    city: 'pune',
+    pincode: 400032,
+    state: 'bangolar',
+    salamt: 3000,
+    tgttoget: 200,
+    ytd: 100,
+    remarks: 'good'
+  },
+  {
+    _id: ObjectId('6619546df6a639476c16c9b8'),
+    saleamanno: 'S00004',
+    name: 'ashish',
+    address1: 'a/5',
+    address2: 'juhu',
+    city: 'pune',
+    pincode: 400044,
+    state: 'maharashtra',
+    salamt: 3500,
+    tgttoget: 200,
+    ytd: 150,
+    remarks: 'good',
+    query: [ 'ok', 'never' ]
+  }
+]
+most> db.client_master.find()
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000,
+    nothing: [ 'never', 'next' ],
+    even: [ 'never', 'next' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ], [ 'next' ], [ 'next' ] ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 0,
+    reward: [],
+    lastUpdate: Timestamp({ t: 1713330839, i: 1 }),
+    nothing: [ 'never' ],
+    ever: [ 'no', 'more' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo',
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.client_master.updateOne({clientno:"C00006"} ,{$set:{"baldue":10000}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.client_master.find()
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000,
+    nothing: [ 'never', 'next' ],
+    even: [ 'never', 'next' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ], [ 'next' ], [ 'next' ] ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 10000,
+    reward: [],
+    lastUpdate: Timestamp({ t: 1713330839, i: 1 }),
+    nothing: [ 'never' ],
+    ever: [ 'no', 'more' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo',
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.produst_master.find()
+
+most> db.product_master.find()
+[
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b5'),
+    productno: 'p00001',
+    description: 'T-shirt',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 200,
+    recorderlvl: 50,
+    sellprice: 350,
+    costprice: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b6'),
+    productno: 'p0345',
+    description: 'shirt',
+    'profit-percent': 6,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 500,
+    costprice: 350
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b7'),
+    productno: 'p06734',
+    description: 'cotton jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 600,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b8'),
+    productno: 'p07865',
+    description: 'jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 750,
+    costprice: 500
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b9'),
+    productno: 'p07868',
+    description: 'Trousers',
+    'profit-percent': 2,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 850,
+    costprice: 550
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9ba'),
+    productno: 'p07885',
+    description: 'pull overs',
+    'profit-percent': '2.5',
+    'unit-measure': 'piecs',
+    qtyonhand: 80,
+    recorderlvl: 30,
+    sellprice: 700,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bb'),
+    productno: 'p07965',
+    description: 'denim shirt',
+    'profit-percent': 4,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 40,
+    sellprice: 350,
+    price: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bc'),
+    productno: 'p07975',
+    description: 'ltera tops',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 70,
+    recorderlvl: 0,
+    sellprice: 300,
+    price: 175
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bd'),
+    productno: 'p08865',
+    description: 'skirts',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 75,
+    recorderlvl: 30,
+    sellprice: 450,
+    decsription: 'shirt'
+  }
+]
+most> db.product_master.updateOne({description:"skirts"} ,{$set:{"saleprice":950}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+most> db.product_master.find()
+[
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b5'),
+    productno: 'p00001',
+    description: 'T-shirt',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 200,
+    recorderlvl: 50,
+    sellprice: 350,
+    costprice: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b6'),
+    productno: 'p0345',
+    description: 'shirt',
+    'profit-percent': 6,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 500,
+    costprice: 350
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b7'),
+    productno: 'p06734',
+    description: 'cotton jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 600,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b8'),
+    productno: 'p07865',
+    description: 'jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 750,
+    costprice: 500
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b9'),
+    productno: 'p07868',
+    description: 'Trousers',
+    'profit-percent': 2,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 850,
+    costprice: 550
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9ba'),
+    productno: 'p07885',
+    description: 'pull overs',
+    'profit-percent': '2.5',
+    'unit-measure': 'piecs',
+    qtyonhand: 80,
+    recorderlvl: 30,
+    sellprice: 700,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bb'),
+    productno: 'p07965',
+    description: 'denim shirt',
+    'profit-percent': 4,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 40,
+    sellprice: 350,
+    price: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bc'),
+    productno: 'p07975',
+    description: 'ltera tops',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 70,
+    recorderlvl: 0,
+    sellprice: 300,
+    price: 175
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bd'),
+    productno: 'p08865',
+    description: 'skirts',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 75,
+    recorderlvl: 30,
+    sellprice: 450,
+    decsription: 'shirt',
+    saleprice: 950
+  }
+
+4/24
+
+Microsoft Windows [Version 10.0.22631.3447]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Admin>mongosh
+Current Mongosh Log ID: 662888c4f8e4d9079516c9b4
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.3
+Using MongoDB:          7.0.8
+Using Mongosh:          2.2.3
+mongosh 2.2.4 is available for download: https://www.mongodb.com/try/download/shell
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-04-13T15:15:28.533+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> show dbs
+admin    40.00 KiB
+ami      48.00 KiB
+cart     44.00 KiB
+config   60.00 KiB
+local    72.00 KiB
+most    184.00 KiB
+test    216.00 KiB
+test> use most
+switched to db most
+most> show tablea
+MongoshInvalidInputError: [COMMON-10001] 'tablea' is not a valid argument for "show".
+most> show tables
+client_master
+product_master
+salesman_master
+most> db.product_master.find()
+[
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b5'),
+    productno: 'p00001',
+    description: 'T-shirt',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 200,
+    recorderlvl: 50,
+    sellprice: 350,
+    costprice: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b6'),
+    productno: 'p0345',
+    description: 'shirt',
+    'profit-percent': 6,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 500,
+    costprice: 350
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b7'),
+    productno: 'p06734',
+    description: 'cotton jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 600,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b8'),
+    productno: 'p07865',
+    description: 'jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 750,
+    costprice: 500
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b9'),
+    productno: 'p07868',
+    description: 'Trousers',
+    'profit-percent': 2,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 850,
+    costprice: 550
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9ba'),
+    productno: 'p07885',
+    description: 'pull overs',
+    'profit-percent': '2.5',
+    'unit-measure': 'piecs',
+    qtyonhand: 80,
+    recorderlvl: 30,
+    sellprice: 700,
+    costprice: 450
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bb'),
+    productno: 'p07965',
+    description: 'denim shirt',
+    'profit-percent': 4,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 40,
+    sellprice: 350,
+    price: 250
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bc'),
+    productno: 'p07975',
+    description: 'ltera tops',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 70,
+    recorderlvl: 0,
+    sellprice: 300,
+    price: 175
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bd'),
+    productno: 'p08865',
+    description: 'skirts',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 75,
+    recorderlvl: 30,
+    sellprice: 450,
+    decsription: 'shirt',
+    saleprice: 950
+  }
+]
+most> db.client_master.find()
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000,
+    nothing: [ 'never', 'next' ],
+    even: [ 'never', 'next' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0,
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ], [ 'next' ], [ 'next' ] ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 10000,
+    reward: [],
+    lastUpdate: Timestamp({ t: 1713330839, i: 1 }),
+    nothing: [ 'never' ],
+    ever: [ 'no', 'more' ],
+    or: [ 'some', 'more' ]
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo',
+    or: [ 'some', 'more' ]
+  }
+]
+most> db.client_master.aggregate([{}])
+MongoServerError[Location40323]: A pipeline stage specification object must contain exactly one field.
+most> db.client_master.aggregate([{$unwind : "or"}]);
+MongoServerError[Location28818]: path option to $unwind stage should be prefixed with a '$': or
+most> db.client_master.aggregate([{$unwind : {or:['some','more']}}]);
+MongoServerError[Location28811]: unrecognized option to $unwind stage: or
+most> db.client_master.aggregate([{$unwind : {$or:['some','more']}}]);
+MongoServerError[Location28811]: unrecognized option to $unwind stage: $or
+most> db.client_master.aggregate([{$unwind : "$or"}]);
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000,
+    nothing: [ 'never', 'next' ],
+    even: [ 'never', 'next' ],
+    or: 'some'
+  },
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000,
+    nothing: [ 'never', 'next' ],
+    even: [ 'never', 'next' ],
+    or: 'more'
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0,
+    or: 'some'
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0,
+    or: 'more'
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000,
+    or: 'some'
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000,
+    or: 'more'
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0,
+    or: 'some'
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0,
+    or: 'more'
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ], [ 'next' ], [ 'next' ] ],
+    or: 'some'
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ], [ 'next' ], [ 'next' ] ],
+    or: 'more'
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 10000,
+    reward: [],
+    lastUpdate: Timestamp({ t: 1713330839, i: 1 }),
+    nothing: [ 'never' ],
+    ever: [ 'no', 'more' ],
+    or: 'some'
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 10000,
+    reward: [],
+    lastUpdate: Timestamp({ t: 1713330839, i: 1 }),
+    nothing: [ 'never' ],
+    ever: [ 'no', 'more' ],
+    or: 'more'
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo',
+    or: 'some'
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo',
+    or: 'more'
+  }
+]
+most> db.client_master.aggregate([{$unwind : "$or"}]);
+[
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000,
+    nothing: [ 'never', 'next' ],
+    even: [ 'never', 'next' ],
+    or: 'some'
+  },
+  {
+    _id: ObjectId('66176e53dc6445d82316c9ba'),
+    clientno: 1,
+    name: 'ivan',
+    address1: 'mumbai',
+    city: 'surat',
+    pincode: 234543,
+    state: 'maharashtra',
+    baldue: 15000,
+    nothing: [ 'never', 'next' ],
+    even: [ 'never', 'next' ],
+    or: 'more'
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0,
+    or: 'some'
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bb'),
+    clientno: 'C00002',
+    name: 'mamta muzumdur',
+    address1: 'kolkata',
+    city: 'madras',
+    pincode: 780001,
+    state: 'tamil nadu',
+    baldue: 0,
+    or: 'more'
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000,
+    or: 'some'
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bc'),
+    clientno: 'C00003',
+    name: 'chhaya bankar',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400057,
+    state: 'maharashtra',
+    baldue: 5000,
+    or: 'more'
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0,
+    or: 'some'
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bd'),
+    clientno: 'C00004',
+    name: 'ashwini joshi',
+    address1: 'kolkata',
+    city: 'bangolar',
+    pincode: 560001,
+    state: 'karnataka',
+    baldue: 0,
+    or: 'more'
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ], [ 'next' ], [ 'next' ] ],
+    or: 'some'
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9be'),
+    clientno: 'C00005',
+    name: 'hansel colaco',
+    address1: 'kolkata',
+    city: 'mumbai',
+    pincode: 400060,
+    state: 'maharashtra',
+    baldue: 20000,
+    reward: [ 'everything', [ 'next' ], [ 'next' ], [ 'next' ] ],
+    or: 'more'
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 10000,
+    reward: [],
+    lastUpdate: Timestamp({ t: 1713330839, i: 1 }),
+    nothing: [ 'never' ],
+    ever: [ 'no', 'more' ],
+    or: 'some'
+  },
+  {
+    _id: ObjectId('661773dcdc6445d82316c9bf'),
+    clientno: 'C00006',
+    name: 'deepak sharma',
+    address1: 'kolkata',
+    city: 'manglore',
+    pincode: 560050,
+    state: 'karnatka',
+    baldue: 10000,
+    reward: [],
+    lastUpdate: Timestamp({ t: 1713330839, i: 1 }),
+    nothing: [ 'never' ],
+    ever: [ 'no', 'more' ],
+    or: 'more'
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo',
+    or: 'some'
+  },
+  {
+    _id: ObjectId('661f4ca505333c20e116c9b5'),
+    lastUpdate: Timestamp({ t: 1713329307, i: 1 }),
+    name: 'mongo',
+    or: 'more'
+  }
+]
+most> db.client_master.aggregate([{$unwind : "$or"}]);
+
+
+most> db.product_master.updateMany({},{$addToSet:{name:['narmad','rajj']}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 9,
+  modifiedCount: 9,
+  upsertedCount: 0
+}
+most> db.product_master.aggregate({$unwind:"$name"})
+[
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b5'),
+    productno: 'p00001',
+    description: 'T-shirt',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 200,
+    recorderlvl: 50,
+    sellprice: 350,
+    costprice: 250,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ 'narmad', 'rajj' ]
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b6'),
+    productno: 'p0345',
+    description: 'shirt',
+    'profit-percent': 6,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 500,
+    costprice: 350,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ 'narmad', 'rajj' ]
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b7'),
+    productno: 'p06734',
+    description: 'cotton jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 600,
+    costprice: 450,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ 'narmad', 'rajj' ]
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b8'),
+    productno: 'p07865',
+    description: 'jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 750,
+    costprice: 500,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ 'narmad', 'rajj' ]
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b9'),
+    productno: 'p07868',
+    description: 'Trousers',
+    'profit-percent': 2,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 850,
+    costprice: 550,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ 'narmad', 'rajj' ]
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9ba'),
+    productno: 'p07885',
+    description: 'pull overs',
+    'profit-percent': '2.5',
+    'unit-measure': 'piecs',
+    qtyonhand: 80,
+    recorderlvl: 30,
+    sellprice: 700,
+    costprice: 450,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ 'narmad', 'rajj' ]
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bb'),
+    productno: 'p07965',
+    description: 'denim shirt',
+    'profit-percent': 4,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 40,
+    sellprice: 350,
+    price: 250,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ 'narmad', 'rajj' ]
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bc'),
+    productno: 'p07975',
+    description: 'ltera tops',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 70,
+    recorderlvl: 0,
+    sellprice: 300,
+    price: 175,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ 'narmad', 'rajj' ]
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bd'),
+    productno: 'p08865',
+    description: 'skirts',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 75,
+    recorderlvl: 30,
+    sellprice: 450,
+    decsription: 'shirt',
+    saleprice: 950,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ 'narmad', 'rajj' ]
+  }
+]
+most> db.product_master.updateMany({},{$addToSet:{namee:{$each:['narmad','rajj']}}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 9,
+  modifiedCount: 9,
+  upsertedCount: 0
+}
+most> db.product_master.aggregate({$unwind:"$namee"})
+[
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b5'),
+    productno: 'p00001',
+    description: 'T-shirt',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 200,
+    recorderlvl: 50,
+    sellprice: 350,
+    costprice: 250,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ [ 'narmad', 'rajj' ] ],
+    namee: 'narmad'
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b5'),
+    productno: 'p00001',
+    description: 'T-shirt',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 200,
+    recorderlvl: 50,
+    sellprice: 350,
+    costprice: 250,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ [ 'narmad', 'rajj' ] ],
+    namee: 'rajj'
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b6'),
+    productno: 'p0345',
+    description: 'shirt',
+    'profit-percent': 6,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 500,
+    costprice: 350,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ [ 'narmad', 'rajj' ] ],
+    namee: 'narmad'
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b6'),
+    productno: 'p0345',
+    description: 'shirt',
+    'profit-percent': 6,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 500,
+    costprice: 350,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ [ 'narmad', 'rajj' ] ],
+    namee: 'rajj'
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b7'),
+    productno: 'p06734',
+    description: 'cotton jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 600,
+    costprice: 450,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ [ 'narmad', 'rajj' ] ],
+    namee: 'narmad'
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b7'),
+    productno: 'p06734',
+    description: 'cotton jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 600,
+    costprice: 450,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ [ 'narmad', 'rajj' ] ],
+    namee: 'rajj'
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b8'),
+    productno: 'p07865',
+    description: 'jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 750,
+    costprice: 500,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ [ 'narmad', 'rajj' ] ],
+    namee: 'narmad'
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b8'),
+    productno: 'p07865',
+    description: 'jence',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 20,
+    sellprice: 750,
+    costprice: 500,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ [ 'narmad', 'rajj' ] ],
+    namee: 'rajj'
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b9'),
+    productno: 'p07868',
+    description: 'Trousers',
+    'profit-percent': 2,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 850,
+    costprice: 550,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ [ 'narmad', 'rajj' ] ],
+    namee: 'narmad'
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9b9'),
+    productno: 'p07868',
+    description: 'Trousers',
+    'profit-percent': 2,
+    'unit-measure': 'piecs',
+    qtyonhand: 150,
+    recorderlvl: 50,
+    sellprice: 850,
+    costprice: 550,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ [ 'narmad', 'rajj' ] ],
+    namee: 'rajj'
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9ba'),
+    productno: 'p07885',
+    description: 'pull overs',
+    'profit-percent': '2.5',
+    'unit-measure': 'piecs',
+    qtyonhand: 80,
+    recorderlvl: 30,
+    sellprice: 700,
+    costprice: 450,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ [ 'narmad', 'rajj' ] ],
+    namee: 'narmad'
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9ba'),
+    productno: 'p07885',
+    description: 'pull overs',
+    'profit-percent': '2.5',
+    'unit-measure': 'piecs',
+    qtyonhand: 80,
+    recorderlvl: 30,
+    sellprice: 700,
+    costprice: 450,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ [ 'narmad', 'rajj' ] ],
+    namee: 'rajj'
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bb'),
+    productno: 'p07965',
+    description: 'denim shirt',
+    'profit-percent': 4,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 40,
+    sellprice: 350,
+    price: 250,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ [ 'narmad', 'rajj' ] ],
+    namee: 'narmad'
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bb'),
+    productno: 'p07965',
+    description: 'denim shirt',
+    'profit-percent': 4,
+    'unit-measure': 'piecs',
+    qtyonhand: 100,
+    recorderlvl: 40,
+    sellprice: 350,
+    price: 250,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ [ 'narmad', 'rajj' ] ],
+    namee: 'rajj'
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bc'),
+    productno: 'p07975',
+    description: 'ltera tops',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 70,
+    recorderlvl: 0,
+    sellprice: 300,
+    price: 175,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ [ 'narmad', 'rajj' ] ],
+    namee: 'narmad'
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bc'),
+    productno: 'p07975',
+    description: 'ltera tops',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 70,
+    recorderlvl: 0,
+    sellprice: 300,
+    price: 175,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ [ 'narmad', 'rajj' ] ],
+    namee: 'rajj'
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bd'),
+    productno: 'p08865',
+    description: 'skirts',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 75,
+    recorderlvl: 30,
+    sellprice: 450,
+    decsription: 'shirt',
+    saleprice: 950,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ [ 'narmad', 'rajj' ] ],
+    namee: 'narmad'
+  },
+  {
+    _id: ObjectId('661c0a842a35c3fc0316c9bd'),
+    productno: 'p08865',
+    description: 'skirts',
+    'profit-percent': 5,
+    'unit-measure': 'piecs',
+    qtyonhand: 75,
+    recorderlvl: 30,
+    sellprice: 450,
+    decsription: 'shirt',
+    saleprice: 950,
+    author: [ [ 'narmad', 'rajj' ] ],
+    name: [ [ 'narmad', 'rajj' ] ],
+    namee: 'rajj'
+  }
+]
+
+
+Microsoft Windows [Version 10.0.22631.3447]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Admin>mongosh
+Current Mongosh Log ID: 662a88b7f5386faedf16c9b4
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.3
+Using MongoDB:          7.0.8
+Using Mongosh:          2.2.3
+mongosh 2.2.4 is available for download: https://www.mongodb.com/try/download/shell
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-04-13T15:15:28.533+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> db.createCollection("core")
+{ ok: 1 }
+test> use core
+switched to db core
+core> db.core.insertMany([{"name":'ami',"age":20,"address":'varachha',"city":'surat'},{"name":'amit',"age":20,"address":'varachha',"city":'surat'},{"name":'yug',"age":13,"address":'nana varachha',"city":'surat'},{"name":'prince',"age":21,"address":'mota varachha',"city":'surat'}]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('662a897ef5386faedf16c9b5'),
+    '1': ObjectId('662a897ef5386faedf16c9b6'),
+    '2': ObjectId('662a897ef5386faedf16c9b7'),
+    '3': ObjectId('662a897ef5386faedf16c9b8')
+  }
+}
+core> db.or.insertMany([{"name":'ami',"age":20,"address":'varachha',"city":'surat'},{"name":'amit',"age":20,"address":'varachha',"city":'surat'},{"name":'yug',"age":14,"address":'mota varachha',"city":'surat'},{"name":'prince',"age":29,"address":'nana varachha',"city":'surat'}]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('662a89cbf5386faedf16c9b9'),
+    '1': ObjectId('662a89cbf5386faedf16c9ba'),
+    '2': ObjectId('662a89cbf5386faedf16c9bb'),
+    '3': ObjectId('662a89cbf5386faedf16c9bc')
+  }
+}
+core> db.core.aggregate([{$lookup:{from:"or",localField:"name",foreignField:"name",as:"firstname"},},]);
+[
+  {
+    _id: ObjectId('662a897ef5386faedf16c9b5'),
+    name: 'ami',
+    age: 20,
+    address: 'varachha',
+    city: 'surat',
+    firstname: [
+      {
+        _id: ObjectId('662a89cbf5386faedf16c9b9'),
+        name: 'ami',
+        age: 20,
+        address: 'varachha',
+        city: 'surat'
+      }
+    ]
+  },
+  {
+    _id: ObjectId('662a897ef5386faedf16c9b6'),
+    name: 'amit',
+    age: 20,
+    address: 'varachha',
+    city: 'surat',
+    firstname: [
+      {
+        _id: ObjectId('662a89cbf5386faedf16c9ba'),
+        name: 'amit',
+        age: 20,
+        address: 'varachha',
+        city: 'surat'
+      }
+    ]
+  },
+  {
+    _id: ObjectId('662a897ef5386faedf16c9b7'),
+    name: 'yug',
+    age: 13,
+    address: 'nana varachha',
+    city: 'surat',
+    firstname: [
+      {
+        _id: ObjectId('662a89cbf5386faedf16c9bb'),
+        name: 'yug',
+        age: 14,
+        address: 'mota varachha',
+        city: 'surat'
+      }
+    ]
+  },
+  {
+    _id: ObjectId('662a897ef5386faedf16c9b8'),
+    name: 'prince',
+    age: 21,
+    address: 'mota varachha',
+    city: 'surat',
+    firstname: [
+      {
+        _id: ObjectId('662a89cbf5386faedf16c9bc'),
+        name: 'prince',
+        age: 29,
+        address: 'nana varachha',
+        city: 'surat'
+      }
+    ]
+  }
+]
+core>
+most>
+
+0.0.22631.3447]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Admin>mongosh
+Current Mongosh Log ID: 662a88b7f5386faedf16c9b4
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.3
+Using MongoDB:          7.0.8
+Using Mongosh:          2.2.3
+mongosh 2.2.4 is available for download: https://www.mongodb.com/try/download/shell
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-04-13T15:15:28.533+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> db.createCollection("core")
+{ ok: 1 }
+test> use core
+switched to db core
+core> db.core.insertMany([{"name":'ami',"age":20,"address":'varachha',"city":'surat'},{"name":'amit',"age":20,"address":'varachha',"city":'surat'},{"name":'yug',"age":13,"address":'nana varachha',"city":'surat'},{"name":'prince',"age":21,"address":'mota varachha',"city":'surat'}]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('662a897ef5386faedf16c9b5'),
+    '1': ObjectId('662a897ef5386faedf16c9b6'),
+    '2': ObjectId('662a897ef5386faedf16c9b7'),
+    '3': ObjectId('662a897ef5386faedf16c9b8')
+  }
+}
+core> db.or.insertMany([{"name":'ami',"age":20,"address":'varachha',"city":'surat'},{"name":'amit',"age":20,"address":'varachha',"city":'surat'},{"name":'yug',"age":14,"address":'mota varachha',"city":'surat'},{"name":'prince',"age":29,"address":'nana varachha',"city":'surat'}]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('662a89cbf5386faedf16c9b9'),
+    '1': ObjectId('662a89cbf5386faedf16c9ba'),
+    '2': ObjectId('662a89cbf5386faedf16c9bb'),
+    '3': ObjectId('662a89cbf5386faedf16c9bc')
+  }
+}
+core> db.core.aggregate([{$lookup:{from:"or",localField:"name",foreignField:"name",as:"firstname"},},]);
+[
+  {
+    _id: ObjectId('662a897ef5386faedf16c9b5'),
+    name: 'ami',
+    age: 20,
+    address: 'varachha',
+    city: 'surat',
+    firstname: [
+      {
+        _id: ObjectId('662a89cbf5386faedf16c9b9'),
+        name: 'ami',
+        age: 20,
+        address: 'varachha',
+        city: 'surat'
+      }
+    ]
+  },
+  {
+    _id: ObjectId('662a897ef5386faedf16c9b6'),
+    name: 'amit',
+    age: 20,
+    address: 'varachha',
+    city: 'surat',
+    firstname: [
+      {
+        _id: ObjectId('662a89cbf5386faedf16c9ba'),
+        name: 'amit',
+        age: 20,
+        address: 'varachha',
+        city: 'surat'
+      }
+    ]
+  },
+  {
+    _id: ObjectId('662a897ef5386faedf16c9b7'),
+    name: 'yug',
+    age: 13,
+    address: 'nana varachha',
+    city: 'surat',
+    firstname: [
+      {
+        _id: ObjectId('662a89cbf5386faedf16c9bb'),
+        name: 'yug',
+        age: 14,
+        address: 'mota varachha',
+        city: 'surat'
+      }
+    ]
+  },
+  {
+    _id: ObjectId('662a897ef5386faedf16c9b8'),
+    name: 'prince',
+    age: 21,
+    address: 'mota varachha',
+    city: 'surat',
+    firstname: [
+      {
+        _id: ObjectId('662a89cbf5386faedf16c9bc'),
+        name: 'prince',
+        age: 29,
+        address: 'nana varachha',
+        city: 'surat'
+      }
+    ]
+  }
+]
+core> db.or.aggregate([{$sort:"name"}]);
+MongoServerError[Location15973]: the $sort key specification must be an object
+core> db.or.aggregate([{$sort:{"name":1}}]);
+[
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9b9'),
+    name: 'ami',
+    age: 20,
+    address: 'varachha',
+    city: 'surat'
+  },
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9ba'),
+    name: 'amit',
+    age: 20,
+    address: 'varachha',
+    city: 'surat'
+  },
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9bc'),
+    name: 'prince',
+    age: 29,
+    address: 'nana varachha',
+    city: 'surat'
+  },
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9bb'),
+    name: 'yug',
+    age: 14,
+    address: 'mota varachha',
+    city: 'surat'
+  }
+]
+core> db.or.aggregate([{$sort:{"address":1}}])
+[
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9bb'),
+    name: 'yug',
+    age: 14,
+    address: 'mota varachha',
+    city: 'surat'
+  },
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9bc'),
+    name: 'prince',
+    age: 29,
+    address: 'nana varachha',
+    city: 'surat'
+  },
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9b9'),
+    name: 'ami',
+    age: 20,
+    address: 'varachha',
+    city: 'surat'
+  },
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9ba'),
+    name: 'amit',
+    age: 20,
+    address: 'varachha',
+    city: 'surat'
+  }
+]
+core> db.or.aggregate([{$match:{"name":'yug'}}])
+[
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9bb'),
+    name: 'yug',
+    age: 14,
+    address: 'mota varachha',
+    city: 'surat'
+  }
+]
+core> db.or.aggregate([{$project:{name:1,_id:0}}])
+[
+  { name: 'ami' },
+  { name: 'amit' },
+  { name: 'yug' },
+  { name: 'prince' }
+]
+core> db.or.aggregate([{$count:{}}])
+MongoServerError[Location40156]: the count field must be a non-empty string
+core> db.or.aggregate([{$count:{"name"}}])
+Uncaught:
+SyntaxError: Unexpected token (1:32)
+
+> 1 | db.or.aggregate([{$count:{"name"}}])
+    |                                 ^
+  2 |
+
+core> db.or.aggregate([{$count:"name"}])
+[ { name: 4 } ]
+core> db.or.updateMany({city:"surat"},{$set:{city:"pune"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 4,
+  modifiedCount: 4,
+  upsertedCount: 0
+}
+core> db.or.find()
+[
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9b9'),
+    name: 'ami',
+    age: 20,
+    address: 'varachha',
+    city: 'pune'
+  },
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9ba'),
+    name: 'amit',
+    age: 20,
+    address: 'varachha',
+    city: 'pune'
+  },
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9bb'),
+    name: 'yug',
+    age: 14,
+    address: 'mota varachha',
+    city: 'pune'
+  },
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9bc'),
+    name: 'prince',
+    age: 29,
+    address: 'nana varachha',
+    city: 'pune'
+  }
+]
+core> db.or.updateMany({city:"pune"},{$rename:{city:"surat"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 4,
+  modifiedCount: 4,
+  upsertedCount: 0
+}
+core> db.or.find()
+[
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9b9'),
+    name: 'ami',
+    age: 20,
+    address: 'varachha',
+    surat: 'pune'
+  },
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9ba'),
+    name: 'amit',
+    age: 20,
+    address: 'varachha',
+    surat: 'pune'
+  },
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9bb'),
+    name: 'yug',
+    age: 14,
+    address: 'mota varachha',
+    surat: 'pune'
+  },
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9bc'),
+    name: 'prince',
+    age: 29,
+    address: 'nana varachha',
+    surat: 'pune'
+  }
+]
+core> db.or.updateMany({city:"pune"},{$rename:{city:"city"}})
+MongoServerError: The source and target field for $rename must differ: city: "city"
+core> db.or.updateMany({city:"pune"},{$rename:{city:"surat"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+core> db.or.updateMany({city:"pune"},{$rename:{city:"mumbai"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+core> db.or.updateMany({city:"pune"},{$rename:{surat:"city"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+core> db.or.updateMany({surat:"pune"},{$rename:{surat:"city"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 4,
+  modifiedCount: 4,
+  upsertedCount: 0
+}
+core> db.or.find()
+[
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9b9'),
+    name: 'ami',
+    age: 20,
+    address: 'varachha',
+    city: 'pune'
+  },
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9ba'),
+    name: 'amit',
+    age: 20,
+    address: 'varachha',
+    city: 'pune'
+  },
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9bb'),
+    name: 'yug',
+    age: 14,
+    address: 'mota varachha',
+    city: 'pune'
+  },
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9bc'),
+    name: 'prince',
+    age: 29,
+    address: 'nana varachha',
+    city: 'pune'
+  }
+]
+core> db.or.updateOne({age:"14"},{$inc:{age:2}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+core> db.or.updateOne({age:"14"},{$inc:5})
+MongoServerError: Modifiers operate on fields but we found type int instead. For example: {$mod: {<field>: ...}} not {$inc: 5}
+core> db.or.updateOne({age:"14"},{$inc:{age:8}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+core> db.or.updateOne({age:"14"},{$inc:{age:8}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+core> db.or.updateOne({age:"14"},{$inc:{age:1}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+core> db.or.updateOne({age:"14"},{$inc:{"age":8}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+core> db.or.updateOne({"age":14},{$inc:{"age":8}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+core> db.or.find()
+[
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9b9'),
+    name: 'ami',
+    age: 20,
+    address: 'varachha',
+    city: 'pune'
+  },
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9ba'),
+    name: 'amit',
+    age: 20,
+    address: 'varachha',
+    city: 'pune'
+  },
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9bb'),
+    name: 'yug',
+    age: 22,
+    address: 'mota varachha',
+    city: 'pune'
+  },
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9bc'),
+    name: 'prince',
+    age: 29,
+    address: 'nana varachha',
+    city: 'pune'
+  }
+]
+core> db.or.updateOne({"age":29},{$inc:{"age":8}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+core> db.or.find()
+[
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9b9'),
+    name: 'ami',
+    age: 20,
+    address: 'varachha',
+    city: 'pune'
+  },
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9ba'),
+    name: 'amit',
+    age: 20,
+    address: 'varachha',
+    city: 'pune'
+  },
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9bb'),
+    name: 'yug',
+    age: 22,
+    address: 'mota varachha',
+    city: 'pune'
+  },
+  {
+    _id: ObjectId('662a89cbf5386faedf16c9bc'),
+    name: 'prince',
+    age: 37,
+    address: 'nana varachha',
+    city: 'pune'
+  }
+

@@ -1,0 +1,292 @@
+1. db.createDatabase("ecommerce")
+
+2. db.createCollection("customers")
+  db.createCollection("product")
+  db.createCollection("orders")
+  db.createCollection("order_items")
+
+
+3. db.customers.insertMany([{"customer_id":'C0001',"first_name":'ami',"last_name":'sangani',"email":'sangani43@mail.com',"password":'123@as'},{"customer_id":'C0002',"first_name":'mit',"last_name":'sangani',"email":'sang43@mail.com',"password":'34@as'},{"customer_id":'C0003',"first_name":'yug',"last_name":'bharuch',"email":'sani43@mail.com',"password":'45@as'},{"customer_id":'C0004',"first_name":'prince',"last_name":'vadhani',"email":'vadhani43@mail.com',"password":'87@rf'},{"customer_id":'C0005',"first_name":'zeel',"last_name":'gabani',"email":'gabani43@mail.com',"password":'187@as'}])
+
+ db.products.insertMany([{"product_id":'S001',"product_name":'t.v',"product_description":'watch',"product_price":21000,"product_quantity":2,"category":'electronic'},{"product_id":'S002',"product_name":'coolar',"product_description":'fridge',"product_price":54000,"product_quantity":5,"category":'refegritar'},{"product_id":'S003',"product_name":'fridge',"product_description":'cool',"product_price":32000,"product_quantity":7,"category":'normal'},{"product_id":'S004',"product_name":'a.c',"product_description":'coolr',"product_price":11000,"product_quantity":3,"category":'ab-normal'},{"product_id":'S005',"product_name":'cenema',"product_description":'watching',"product_price":50000,"product_quantity":1,"category":'watching'}])
+
+ db.orders.insertMany([{"order_id":'V0001',"customer_id":'C0001',"order_date":'02-01-2024',"total_prices":54000},{"order_id":'V0002',"customer_id":'C0002',"order_date":'02-05-2024',"total_prices":60000},{"order_id":'V0003',"customer_id":'C0003',"order_date":'08-01-2024',"total_prices":53000},{"order_id":'V0004',"customer_id":'C0004',"order_date":'02-03-2024',"total_prices":68000},{"order_id":'V0005',"customer_id":'C0005',"order_date":'22-11-2024',"total_prices":59000}])
+
+
+ db.order_items.insertMany([{"order_item_id":'N0001',"order_id":'V0001',"product_id":'S001',"quantity":4,"price":43000},{"order_item_id":'N0002',"order_id":'V0002',"product_id":'S002',"quantity":3,"price":34000},{"order_item_id":'N0003',"order_id":'V0003',"product_id":'S003',"quantity":6,"price":50000},{"order_item_id":'N0004',"order_id":'V0004',"product_id":'S004',"quantity":1,"price":56000},{"order_item_id":'N0005',"order_id":'V0005',"product_id":'S005',"quantity":2,"price":98787}])
+
+
+4.
+ db.customers.find()
+[
+  {
+    _id: ObjectId('662c77b06170e1a21e16c9b5'),
+    customer_id: 'C0001',
+    first_name: 'ami',
+    last_name: 'sangani',
+    email: 'sangani43@mail.com',
+    password: '123@as'
+  },
+  {
+    _id: ObjectId('662c77b06170e1a21e16c9b6'),
+    customer_id: 'C0002',
+    first_name: 'mit',
+    last_name: 'sangani',
+    email: 'sang43@mail.com',
+    password: '34@as'
+  },
+  {
+    _id: ObjectId('662c77b06170e1a21e16c9b7'),
+    customer_id: 'C0003',
+    first_name: 'yug',
+    last_name: 'bharuch',
+    email: 'sani43@mail.com',
+    password: '45@as'
+  },
+  {
+    _id: ObjectId('662c77b06170e1a21e16c9b8'),
+    customer_id: 'C0004',
+    first_name: 'prince',
+    last_name: 'vadhani',
+    email: 'vadhani43@mail.com',
+    password: '87@rf'
+  },
+  {
+    _id: ObjectId('662c77b06170e1a21e16c9b9'),
+    customer_id: 'C0005',
+    first_name: 'zeel',
+    last_name: 'gabani',
+    email: 'gabani43@mail.com',
+    password: '187@as'
+  }
+]
+
+5. db.products.find()
+[
+  {
+    _id: ObjectId('662c7bac6170e1a21e16c9ba'),
+    product_id: 'S001',
+    product_name: 't.v',
+    product_description: 'watch',
+    product_price: 21000,
+    product_quantity: 2,
+    category: 'electronic'
+  },
+  {
+    _id: ObjectId('662c7bac6170e1a21e16c9bb'),
+    product_id: 'S002',
+    product_name: 'coolar',
+    product_description: 'fridge',
+    product_price: 54000,
+    product_quantity: 5,
+    category: 'refegritar'
+  },
+  {
+    _id: ObjectId('662c7bac6170e1a21e16c9bc'),
+    product_id: 'S003',
+    product_name: 'fridge',
+    product_description: 'cool',
+    product_price: 32000,
+    product_quantity: 7,
+    category: 'normal'
+  },
+  {
+    _id: ObjectId('662c7bac6170e1a21e16c9bd'),
+    product_id: 'S004',
+    product_name: 'a.c',
+    product_description: 'coolr',
+    product_price: 11000,
+    product_quantity: 3,
+    category: 'ab-normal'
+  },
+  {
+    _id: ObjectId('662c7bac6170e1a21e16c9be'),
+    product_id: 'S005',
+    product_name: 'cenema',
+    product_description: 'watching',
+    product_price: 50000,
+    product_quantity: 1,
+    category: 'watching'
+  }
+]
+
+6. db.orders.find()
+[
+  {
+    _id: ObjectId('662c7c9e6170e1a21e16c9bf'),
+    order_id: 'V0001',
+    customer_id: 'C0001',
+    order_date: '02-01-2024',
+    total_prices: 54000
+  },
+  {
+    _id: ObjectId('662c7d886170e1a21e16c9c0'),
+    order_id: 'V0002',
+    customer_id: 'C0002',
+    order_date: '02-05-2024',
+    total_prices: 60000
+  },
+  {
+    _id: ObjectId('662c7d886170e1a21e16c9c1'),
+    order_id: 'V0003',
+    customer_id: 'C0003',
+    order_date: '08-01-2024',
+    total_prices: 53000
+  },
+  {
+    _id: ObjectId('662c7d886170e1a21e16c9c2'),
+    order_id: 'V0004',
+    customer_id: 'C0004',
+    order_date: '02-03-2024',
+    total_prices: 68000
+  },
+  {
+    _id: ObjectId('662c7d886170e1a21e16c9c3'),
+    order_id: 'V0005',
+    customer_id: 'C0005',
+    order_date: '22-11-2024',
+    total_prices: 59000
+  }
+]
+
+7. db.order_items.find()
+[
+  {
+    _id: ObjectId('662c816d6170e1a21e16c9c4'),
+    order_item_id: 'N0001',
+    order_id: 'V0001',
+    product_id: 'S001',
+    quantity: 4,
+    price: 43000
+  },
+  {
+    _id: ObjectId('662c816d6170e1a21e16c9c5'),
+    order_item_id: 'N0002',
+    order_id: 'V0002',
+    product_id: 'S002',
+    quantity: 3,
+    price: 34000
+  },
+  {
+    _id: ObjectId('662c816d6170e1a21e16c9c6'),
+    order_item_id: 'N0003',
+    order_id: 'V0003',
+    product_id: 'S003',
+    quantity: 6,
+    price: 50000
+  },
+  {
+    _id: ObjectId('662c816d6170e1a21e16c9c7'),
+    order_item_id: 'N0004',
+    order_id: 'V0004',
+    product_id: 'S004',
+    quantity: 1,
+    price: 56000
+  },
+  {
+    _id: ObjectId('662c816d6170e1a21e16c9c8'),
+    order_item_id: 'N0005',
+    order_id: 'V0005',
+    product_id: 'S005',
+    quantity: 2,
+    price: 98787
+  }
+]
+
+8.db.orders.aggregate([{$lookup:{from:"order_items",localField:"order_id",foreignField:"order_id",as:"details"},},])
+
+[
+  {
+    _id: ObjectId('662c7c9e6170e1a21e16c9bf'),
+    order_id: 'V0001',
+    customer_id: 'C0001',
+    order_date: '02-01-2024',
+    total_prices: 54000,
+    details: [
+      {
+        _id: ObjectId('662c816d6170e1a21e16c9c4'),
+        order_item_id: 'N0001',
+        order_id: 'V0001',
+        product_id: 'S001',
+        quantity: 4,
+        price: 43000
+      }
+    ]
+  },
+  {
+    _id: ObjectId('662c7d886170e1a21e16c9c0'),
+    order_id: 'V0002',
+    customer_id: 'C0002',
+    order_date: '02-05-2024',
+    total_prices: 60000,
+    details: [
+      {
+        _id: ObjectId('662c816d6170e1a21e16c9c5'),
+        order_item_id: 'N0002',
+        order_id: 'V0002',
+        product_id: 'S002',
+        quantity: 3,
+        price: 34000
+      }
+    ]
+  },
+  {
+    _id: ObjectId('662c7d886170e1a21e16c9c1'),
+    order_id: 'V0003',
+    customer_id: 'C0003',
+    order_date: '08-01-2024',
+    total_prices: 53000,
+    details: [
+      {
+        _id: ObjectId('662c816d6170e1a21e16c9c6'),
+        order_item_id: 'N0003',
+        order_id: 'V0003',
+        product_id: 'S003',
+        quantity: 6,
+        price: 50000
+      }
+    ]
+  },
+  {
+    _id: ObjectId('662c7d886170e1a21e16c9c2'),
+    order_id: 'V0004',
+    customer_id: 'C0004',
+    order_date: '02-03-2024',
+    total_prices: 68000,
+    details: [
+      {
+        _id: ObjectId('662c816d6170e1a21e16c9c7'),
+        order_item_id: 'N0004',
+        order_id: 'V0004',
+        product_id: 'S004',
+        quantity: 1,
+        price: 56000
+      }
+    ]
+  },
+  {
+    _id: ObjectId('662c7d886170e1a21e16c9c3'),
+    order_id: 'V0005',
+    customer_id: 'C0005',
+    order_date: '22-11-2024',
+    total_prices: 59000,
+    details: [
+      {
+        _id: ObjectId('662c816d6170e1a21e16c9c8'),
+        order_item_id: 'N0005',
+        order_id: 'V0005',
+        product_id: 'S005',
+        quantity: 2,
+        price: 98787
+      }
+    ]
+  }
+]
+
+9. db.products.updateOne({"product_id": 'S005'},{$set:{"product_quantity":4}})
+
+10.db.customers.aggregate([{$lookup:{from:"orders",localField:"customer_id",foreignField:"customer_id",as:"details"},},]) 
+     
+11.db.products.aggregate([{$sort:{"product_price":1}}])
+
+12. db.orders.deleteOne({"order_id":'V0004'})
